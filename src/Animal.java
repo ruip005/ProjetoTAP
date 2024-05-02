@@ -1,5 +1,4 @@
-package exercicios.exercicio_animais;
-
+package exercicios.exercicio_animais.src;
 public abstract class Animal {
     private String NomeAnimal;
     private String Especie;
@@ -8,6 +7,8 @@ public abstract class Animal {
     private String sexo;
     private String raca;
 
+    public Animal (){
+    }
     public Animal(String nome, String especie, int idade, String cor, String sexo, String raca) {
         this.NomeAnimal = nome;
         this.Especie = especie;

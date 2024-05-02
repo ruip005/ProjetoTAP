@@ -1,6 +1,6 @@
 /*package exercicios.exercicio_animais;
-import exercicios.exercicio_animais.Animal.Mamifero;
-import exercicios.exercicio_animais.Animal.Reptil;
+import exercicios.exercicio_animais.src.Animal.Mamifero;
+import exercicios.exercicio_animais.src.Animal.Reptil;
 
 public class Main {
 
