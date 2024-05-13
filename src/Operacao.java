@@ -95,5 +95,114 @@ public class Operacao {
     public HashMap<Integer, Operacao> getOperacoes() {
         return operacoes;
     }
+
+    public void listarIntervencoes(String intervencao, Date inicio, Date fim){
+        for (Operacao op : operacoes.values()){
+            if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(inicio) && op.getData_fim().before(fim)){ // Verificar se a intervenção é do tipo pretendido e se a data está entre o intervalo
+                System.out.println(op);
+            }
+        }
+    }
+
+    public void listarIntervencoes(String intervencao, int idVeterinario){
+        Veterinario vet = Veterinario.getVeterinarioById(idVeterinario);
+        if (vet == null){
+            System.out.println("Veterinário não encontrado");
+            return;
+        }
+        for (Operacao op : operacoes.values()){
+            if (op.getIntervencao().equals(intervencao)){
+                System.out.println(op);
+            }
+        }
+    }
+
+    public void listarIntervencoes(String intervencao, int idVeterinario, Date inicio, Date fim){
+        Veterinario vet = Veterinario.getVeterinarioById(idVeterinario);
+        if (vet == null){
+            System.out.println("Veterinário não encontrado");
+            return;
+        }
+        for (Operacao op : operacoes.values()){
+            if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(inicio) && op.getData_fim().before(fim)){ // Verificar se a intervenção é do tipo pretendido e se a data está entre o intervalo
+                System.out.println(op);
+            }
+        }
+    }
+
+    public void listarIntervencoes(String intervencao, Integer idAnimal){
+        Animal ani = Animal.getAnimalById(idAnimal);
+        if (ani == null){
+            System.out.println("Animal não encontrado");
+            return;
+        }
+        for (Operacao op : operacoes.values()){
+            if (op.getIntervencao().equals(intervencao)){
+                System.out.println(op);
+            }
+        }
+    }
+
+    public void listarIntervencoesAgendadas(String intervencao, Integer idAnimal){
+        Animal ani = Animal.getAnimalById(idAnimal);
+        if (ani == null){
+            System.out.println("Animal não encontrado");
+            return;
+        }
+        for (Operacao op : operacoes.values()){
+            if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(new Date())){
+                System.out.println(op);
+            }
+        }
+    }
+
+    public void listarIntervencoesHoje(String Intervencao, Integer idAnimal){
+        Animal ani = Animal.getAnimalById(idAnimal);
+        if (ani == null){
+            System.out.println("Animal não encontrado");
+            return;
+        }
+        for (Operacao op : operacoes.values()){
+            if (op.getIntervencao().equals(Intervencao) && op.getData_inicio().equals(new Date())){
+                System.out.println(op);
+            }
+        }
+    }
+
+    public void listarIntervencoes(String intervencao, Integer idAnimal, Integer idCliente, Date inicio, Date fim){
+        Animal ani = Animal.getAnimalById(idAnimal);
+        Cliente cli = Cliente.getClienteByID(idCliente);
+        if (ani == null || cli == null){
+            System.out.println("Animal ou Cliente não encontrado");
+            return;
+        }
+        double total = 0;
+        for (Operacao op : operacoes.values()){
+            if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(inicio) && op.getData_fim().before(fim)){
+                System.out.println(op);
+                total += op.getCusto();
+            }
+        }
+        System.out.println("Total: " + total);
+    }
+
+    public void listarIntervencoes(String intervencao, Integer idAnimal, Integer idCliente){
+        Animal ani = Animal.getAnimalById(idAnimal);
+        Cliente cli = Cliente.getClienteByID(idCliente);
+        if (ani == null || cli == null){
+            System.out.println("Animal ou Cliente não encontrado");
+            return;
+        }
+        double total = 0;
+        for (Operacao op : operacoes.values()){
+            // depois do dia atual
+            if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(new Date())){
+                System.out.println(op);
+                total += op.getCusto();
+            }
+        }
+        System.out.println("Total: " + total);
+    }
+
 }
 
