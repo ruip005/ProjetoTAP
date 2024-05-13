@@ -3,7 +3,7 @@ package exercicios.exercicio_animais.src;
 import java.util.HashMap;
 
 public class Cliente extends Pessoa {
-    HashMap <Integer, Cliente> clientes = new HashMap<>();
+    private static HashMap <Integer, Cliente> clientes = new HashMap<>();
     HashMap <Integer, Animal> animais = new HashMap<>();
     private Veterinario veterinario;
     private Animal animal;
@@ -82,5 +82,13 @@ public class Cliente extends Pessoa {
 
     public HashMap<Integer, Animal> getAnimais() {
         return animais;
+    }
+    
+    public static Cliente getClienteByID(int id) {
+        if (clientes.containsKey(id)) { // Verificar se a chave existe no HashMap | static para poder ser acedido por outras classes
+            return clientes.get(id);
+        } else {
+            return null;
+        }
     }
 }

@@ -38,4 +38,12 @@ public class Veterinario extends Pessoa {
     public HashMap<Integer, Cliente> getClientes() {
         return clientes;
     }
+
+    public static Veterinario getVeterinarioById(int id) { // Verificar se a chave existe no HashMap | static para poder ser acedido por outras classes
+        if (veterinarios.containsKey(id)) {
+            return veterinarios.get(id);
+        } else {
+            return null;
+        }
+    }
 }

@@ -8,7 +8,7 @@ enum Sexo {
 }
 
 public abstract class Animal {
-    HashMap <Integer, Animal> animais = new HashMap<>();
+    private static HashMap <Integer, Animal> animais = new HashMap<>();
     HashMap <Integer, Cliente> clientes = new HashMap<>();
     private String nome;
     private String especie;
@@ -75,5 +75,13 @@ public abstract class Animal {
 
     public HashMap<Integer, Cliente> getClientes() {
         return clientes;
+    }
+
+    public static Animal getAnimalById(int id) { // Verificar se a chave existe no HashMap | static para poder ser acedido por outras classes
+        if (animais.containsKey(id)) {
+            return animais.get(id);
+        } else {
+            return null;
+        }
     }
 }

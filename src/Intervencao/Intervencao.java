@@ -18,4 +18,5 @@ public abstract class Intervencao { // Criar uma classe abstrata Intervencao, co
     // Uma classe abstrata é uma classe que não pode ser instanciada, ou seja, não é possível criar um objeto a partir dela.
     public abstract double calcularCusto(); // Este metodo deve ser implementado nas subclasses
     public abstract double calcularDuracao(); // Este metodo deve ser implementado nas subclasses
+    public abstract String getTipoIntervencao(); // Este metodo deve ser implementado nas subclasses
 }

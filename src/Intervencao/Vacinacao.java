@@ -23,4 +23,8 @@ public class Vacinacao extends Intervencao {
     public double calcularDuracao() { // Este método é comum a todas as intervenções, irá ser reescrito nas subclasses
         return 0.5;
     }
+
+    public String getTipoIntervencao(){
+        return "Vacinação";
+    }
 }

@@ -23,4 +23,8 @@ public class Cirurgia extends Intervencao {
     public double calcularDuracao() { // Este método é comum a todas as intervenções, irá ser reescrito nas subclasses
         return 2;
     }
+
+    public String getTipoIntervencao(){
+        return "Cirurgia";
+    }
 }
