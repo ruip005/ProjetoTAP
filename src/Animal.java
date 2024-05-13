@@ -4,12 +4,11 @@ package exercicios.exercicio_animais.src;
 import java.util.HashMap;
 
 enum Sexo {
-    MACHO, FEMEA
+    MACHO, FEMEA // Enumerado para definir o sexo do animal, MACHO ou FEME
 }
 
 public abstract class Animal {
     private static HashMap <Integer, Animal> animais = new HashMap<>();
-    HashMap <Integer, Cliente> clientes = new HashMap<>();
     private String nome;
     private String especie;
     private Sexo sexoAnimal;
@@ -67,14 +66,6 @@ public abstract class Animal {
 
     public HashMap<Integer, Animal> getAnimais() {
         return animais;
-    }
-
-    public void setCliente(Cliente cliente) {
-        clientes.put(cliente.lastId(), cliente);
-    }
-
-    public HashMap<Integer, Cliente> getClientes() {
-        return clientes;
     }
 
     public static Animal getAnimalById(int id) { // Verificar se a chave existe no HashMap | static para poder ser acedido por outras classes

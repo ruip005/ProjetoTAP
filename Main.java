@@ -1,5 +1,7 @@
 package exercicios.exercicio_animais;
+import java.sql.SQLOutput;
 import java.util.Scanner;
+import exercicios.exercicio_animais.src.*;
 public class Main {
     public static void main(String[] args) {
        // fix me
@@ -75,7 +77,7 @@ public class Main {
         }
     }
 
-    public String transformarString(String value) {
+    public static String transformarString(String value) {
         try {
             String newValue = value.trim();
             if (newValue.isEmpty()) {
@@ -113,19 +115,53 @@ public class Main {
 
     public static void escolherVeterinario(int Value){
         switch (Value){
-            case 1:
-                System.out.println("Adicionar Veterinário");
-                scanner.nextLine();
+            case 1: // Adicionar veterinario
+                try {
+                    System.out.println("Qual é o nome do Veterinário?");
+                    String nome = transformarString(scanner.nextLine());
+                    System.out.println("Qual é o telefone do Veterinário?");
+                    Integer telefone = transformarNumero(scanner.nextLine());
+                    System.out.println("Qual é o email do Veterinário?");
+                    String email = transformarString(scanner.nextLine());
+                    System.out.println("Qual é o NIF do Veterinário?");
+                    Integer nif = transformarNumero(scanner.nextLine());
+                    System.out.println("Qual é a ordem do Veterinário?");
+                    Integer ordem = transformarNumero(scanner.nextLine());
+                    Veterinario veterinario = new Veterinario(nome, telefone, email, nif, ordem);
+                    veterinario.adicionarVeterinario(veterinario);
+                    System.out.println("Veterinário adicionado com sucesso!\n");
+                } catch (NullPointerException nul){
+                    System.out.println("ERRO: "+nul);
+                    menuVeterinario();
+                }
                 break;
-
-            case 2 :
-                System.out.println("Mostrar todos os Veterinários");
-                scanner.nextLine();
+            case 2 : //Mostar todos os Veterinários
+                try {
+                    Veterinario.getVeterinarios().forEach((k, v) -> {
+                        System.out.println("ID: "+k+" | Nome: "+v.getNome()+" | Telefone: "+v.getTelefone()+" | Email: "+v.getEmail()+" | NIF: "+v.getNif()+" | Ordem: "+v.getIdOrdemVeterinarios());
+                    });
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
+                    menuVeterinario();
+                }
                 break;
-
-            case 3:
-                System.out.println("Mostrar o Veterinário de um Animal");
-                
+            case 3: //Mostrar o Veterinário e seus animais
+                try{
+                    System.out.println("Qual é o ID do Sujeito");
+                    Integer id = transformarNumero(scanner.nextLine());
+                    System.out.println("Veterinário: "+Veterinario.getVeterinarioById(id).getNome()+", tem os seguintes animais:");
+                    Veterinario.getAnimaisVeterinario(id).forEach(a -> {
+                        System.out.println("ID: "+Animal.getAnimalById(a).hashCode()+" | Nome: "+Animal.getAnimalById(a).getNome()+" | Espécie: "+Animal.getAnimalById(a).getEspecie()+" | Peso: "+Animal.getAnimalById(a).getPeso()+" | Sexo: "+Animal.getAnimalById(a).getSexoAnimal());
+                    });
+                } catch (NullPointerException e){
+                    System.out.println("ERRO: "+e);
+                    menuVeterinario();
+                }
+            case 4:
+                break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+                    menuVeterinario();
         }
     }
 }

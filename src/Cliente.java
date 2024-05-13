@@ -1,10 +1,11 @@
 package exercicios.exercicio_animais.src;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Cliente extends Pessoa {
     private static HashMap <Integer, Cliente> clientes = new HashMap<>();
-    HashMap <Integer, Animal> animais = new HashMap<>();
+    private static HashMap<Integer, ArrayList<Integer>> clienteAnimais = new HashMap<Integer, ArrayList<Integer>>();
     private Veterinario veterinario;
     private Animal animal;
     private String nomeRua;
@@ -63,26 +64,35 @@ public class Cliente extends Pessoa {
         return clientes;
     }
 
-    public void setVeterinario(Veterinario veterinario) {
-        this.veterinario = veterinario;
-        veterinario.adicionarCliente(this);
-    }
-    public Veterinario getVeterinario() {
-        return veterinario;
+    public static void adicionarAnimalCliente(Integer idCliente, Integer idAnimal) {
+        if (clientes.containsKey(idCliente) == false) {
+            System.out.println("Cliente não existe");
+            return;
+        }
+        if (Animal.getAnimalById(idAnimal) == null) { // Verificar se o animal existe (método estático)
+            System.out.println("Animal não existe");
+            return;
+        }
+        if (clienteAnimais.containsKey(idCliente)) {
+            ArrayList<Integer> animais = clienteAnimais.get(idCliente);
+            animais.add(idAnimal);
+            clienteAnimais.put(idCliente, animais);
+        } else {
+            ArrayList<Integer> animais = new ArrayList<>();
+            animais.add(idAnimal);
+            clienteAnimais.put(idCliente, animais);
+        }
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
-        animal.setCliente(this);
+    public static ArrayList<Integer> getAnimaisCliente(Integer idCliente) {
+        if (clienteAnimais.containsKey(idCliente)) {
+            return clienteAnimais.get(idCliente);
+        } else {
+            return null;
+        }
     }
 
-    public Animal getAnimal() {
-        return animal;
-    }
 
-    public HashMap<Integer, Animal> getAnimais() {
-        return animais;
-    }
     
     public static Cliente getClienteByID(int id) {
         if (clientes.containsKey(id)) { // Verificar se a chave existe no HashMap | static para poder ser acedido por outras classes
