@@ -1,11 +1,10 @@
 package exercicios.exercicio_animais;
-
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
        // fix me
     }
-
-    void menuVeterinario(){
+    public static void menuVeterinario(){
         System.out.println("- - - - - -Menu de Veterinários- - - - - -");
         System.out.println("1- Adicionar um Veterinário.");
         System.out.println("2- Mostrar todos os veterinários.");
@@ -15,7 +14,7 @@ public class Main {
         System.out.println("0-Sair.");
     }
 
-    void menuCliente(){
+    public static void menuCliente(){
         System.out.println("- - - - - -Menu de Clientes- - - - - -");
         System.out.println("1- Adicionar um Cliente.");
         System.out.println("2- Mostrar todos os Clientes.");
@@ -25,7 +24,7 @@ public class Main {
     }
 
 
-    void menuAnimal(){
+    public static void menuAnimal(){
         System.out.println("- - - - - -Menu de Animais- - - - - -");
         System.out.println("1- Adicionar um Animal.");
         System.out.println("2- Mostrar todos os Animais.");
@@ -34,8 +33,8 @@ public class Main {
         System.out.println("0-Sair.");
     }
 
-    void menuIntervencao(){
-        System.out.println("- - - - - -Menu de Intervenções- - - - - -");
+    public static void menuOperacao(){
+        System.out.println("- - - - - -Menu de Operações- - - - - -");
         System.out.println("1- Adicionar uma Intervenção.");
         System.out.println("2- Mostrar todas as Intervenções.");
         System.out.println("3- Mostrar a Intervenção de um Animal.");
@@ -44,11 +43,34 @@ public class Main {
         System.out.println("6- Mostrar todas as invervenções de um Animal de uma determinada data.");
     }
 
+    public static void menuPrincipal(){
+        System.out.println("- - - - - -Menu Principal- - - - - -");
+        System.out.println("1- Menu de Veterinários.");
+        System.out.println("2- Menu de Clientes.");
+        System.out.println("3- Menu de Animais.");
+        System.out.println("4- Menu de Operações.");
+        System.out.println("0- Sair.");
+
+        try {
+            Integer opcao = transformarNumero(scanner.nextLine());
+            while (opcao == null){
+                System.out.println("ERRO: Por favor insira apenas números!");
+                opcao = transformarNumero(scanner.nextLine());
+            }
+            escolher(opcao);
+        } catch (NullPointerException nul){
+            System.out.println("ERRO: "+nul);
+            menuPrincipal();
+        }
+    }
+
     // Utils
-    public Integer transformarNumero(String value){
+    public static Integer transformarNumero(String value){
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
+            return null;
+        } catch (NullPointerException m) {
             return null;
         }
     }
@@ -62,6 +84,48 @@ public class Main {
             return newValue;
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    public static void escolher(Integer value){
+        switch (value) {
+            case 1:
+                menuVeterinario();
+                break;
+            case 2:
+                menuCliente();
+                break;
+            case 3:
+                menuAnimal();
+                break;
+            case 4:
+                menuOperacao();
+                break;
+            case 0:
+                System.out.println("Até á próxima...");
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Opção inválida. Tente novamente.");
+                menuPrincipal();
+        }
+    }
+
+    public static void escolherVeterinario(int Value){
+        switch (Value){
+            case 1:
+                System.out.println("Adicionar Veterinário");
+                scanner.nextLine();
+                break;
+
+            case 2 :
+                System.out.println("Mostrar todos os Veterinários");
+                scanner.nextLine();
+                break;
+
+            case 3:
+                System.out.println("Mostrar o Veterinário de um Animal");
+                
         }
     }
 }
