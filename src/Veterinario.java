@@ -1,80 +1,41 @@
 package exercicios.exercicio_animais.src;
 
-public class Veterinario {
-    private Integer id;
-    private String nome;
-    private String crmv;
-    private String especialidade;
-    private String telefone;
-    private String email;
-    private String endereco;
+import java.util.HashMap;
 
-    public Veterinario() {
+public class Veterinario extends Pessoa {
+    private static HashMap<Integer, Veterinario> veterinarios = new HashMap<>(); // static para poder ser acedido por Gestor
+    private HashMap<Integer, Cliente> clientes = new HashMap<>();
+    private Integer idOrdemVeterinarios;
+
+    public Veterinario(String nome, Integer telefone, String email, Integer nif, Integer idOrdemVeterinarios) {
+        super(nome, telefone, email, nif);
+        this.idOrdemVeterinarios = idOrdemVeterinarios;
     }
 
-    public Veterinario(Integer id, String nome, String crmv, String especialidade, String telefone, String email, String endereco) {
-        this.id = id;
-        this.nome = nome;
-        this.crmv = crmv;
-        this.especialidade = especialidade;
-        this.telefone = telefone;
-        this.email = email;
-        this.endereco = endereco;
+    public Integer getIdOrdemVeterinarios() {
+        return idOrdemVeterinarios;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdOrdemVeterinarios(Integer idOrdemVeterinarios) {
+        this.idOrdemVeterinarios = idOrdemVeterinarios;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Integer lastId() {
+        return veterinarios.size();
     }
 
-    public void setCrmv(String crmv) {
-        this.crmv = crmv;
+    public void adicionarVeterinario(Veterinario veterinario) {
+        veterinarios.put(lastId()+1, veterinario);
+    }
+    public static HashMap<Integer, Veterinario> getVeterinarios() { // static para poder ser acedido por Gestor
+        return veterinarios;
     }
 
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
+    public void adicionarCliente(Cliente cliente) {
+        clientes.put(cliente.hashCode(), cliente);
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getCrmv() {
-        return crmv;
-    }
-
-    public String getEspecialidade() {
-        return especialidade;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getEndereco() {
-        return endereco;
+    public HashMap<Integer, Cliente> getClientes() {
+        return clientes;
     }
 }

@@ -1,125 +1,79 @@
+// Animal.java
 package exercicios.exercicio_animais.src;
+
+import java.util.HashMap;
+
+enum Sexo {
+    MACHO, FEMEA
+}
+
 public abstract class Animal {
-    private String NomeAnimal;
-    private String Especie;
-    private int Idade;
-    private String cor;
-    private String sexo;
-    private String raca;
+    HashMap <Integer, Animal> animais = new HashMap<>();
+    HashMap <Integer, Cliente> clientes = new HashMap<>();
+    private String nome;
+    private String especie;
+    private Sexo sexoAnimal;
+    private float peso;
 
     public Animal (){
     }
-    public Animal(String nome, String especie, int idade, String cor, String sexo, String raca) {
-        this.NomeAnimal = nome;
-        this.Especie = especie;
-        this.Idade = idade;
-        this.cor = cor;
-        this.sexo = sexo;
-        this.raca = raca;
-    }
 
-    public void setNome(String nome) {
-        this.NomeAnimal = nome;
-    }
-
-    public void setEspecie(String especie) {
-        this.Especie = especie;
-    }
-
-    public void setIdade(int idade) {
-        this.Idade = idade;
-    }
-
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
-
-    public void setRaca(String raca) {
-        this.raca = raca;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public Animal (String nome, String especie, float peso, Sexo sexoAnimal){
+        this.nome = nome;
+        this.especie = especie;
+        this.peso = peso;
+        this.sexoAnimal = sexoAnimal;
     }
 
     public String getNome() {
-        return NomeAnimal;
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEspecie() {
-        return Especie;
+        return especie;
     }
 
-    public int getIdade() {
-        return Idade;
+    public void setEspecie(String especie) {
+        this.especie = especie;
     }
 
-    public String getCor() {
-        return cor;
+    public float getPeso() {
+        return peso;
     }
 
-    public String getRaca() {
-        return raca;
+    public void setPeso(float peso) {
+        this.peso = peso;
     }
 
-    public String getSexo() {
-        return sexo;
+    public Sexo getSexoAnimal() {
+        return sexoAnimal;
     }
 
-    public abstract String locomocao();
-
-
-    public class Mamifero extends Animal {
-        private String TipoPelo;
-
-        public Mamifero(String nome, String especie, int idade, String cor, String sexo, String raca, String tipoPelo) {
-            super(nome, especie, idade, cor, sexo, raca);
-            this.TipoPelo = tipoPelo;
-        }
-
-        public void setTipoPelo(String tipoPelo) {
-            this.TipoPelo = tipoPelo;
-        }
-
-        public String getTipoPelo() {
-            return TipoPelo;
-        }
-
-        public String toString() {
-            return super.toString() + " Tipo de Pelo: " + TipoPelo;
-        }
-
-        public  String locomocao(){
-            return "Caminha sobre 4 patas";
-        };
+    public void setSexoAnimal(Sexo sexoAnimal) {
+        this.sexoAnimal = sexoAnimal;
     }
 
-    public class Reptil extends Animal {
-        private boolean Venenoso;
-
-        public Reptil(String nome, String especie, int idade, String cor, String sexo, String raca, boolean venenoso) {
-            super(nome, especie, idade, cor, sexo, raca);
-            this.Venenoso = venenoso;
-        }
-
-        public void setVenenoso(boolean venenoso) {
-            this.Venenoso = venenoso;
-        }
-
-        public boolean getVenenoso() {
-            return Venenoso;
-        }
-
-        public String toString() {
-            return super.toString() + " Venenoso: " + Venenoso;
-        }
-
-        public  String locomocao(){
-            return "Rasteja pelo chão";
-        };
+    public Integer lastId() {
+        return animais.size();
     }
-    
-  
-  
- 
+
+    public void adicionarAnimal(Animal animal) {
+        animais.put(lastId()+1, animal);
+    }
+
+    public HashMap<Integer, Animal> getAnimais() {
+        return animais;
+    }
+
+    public void setCliente(Cliente cliente) {
+        clientes.put(cliente.lastId(), cliente);
+    }
+
+    public HashMap<Integer, Cliente> getClientes() {
+        return clientes;
+    }
 }
