@@ -6,6 +6,8 @@ import java.util.HashMap;
 public class Cliente extends Pessoa {
     private static HashMap <Integer, Cliente> clientes = new HashMap<>();
     private static HashMap<Integer, ArrayList<Integer>> clienteAnimais = new HashMap<Integer, ArrayList<Integer>>();
+    private static Integer nextId = 1;
+    private Integer idCli;
     private Veterinario veterinario;
     private Animal animal;
     private String nomeRua;
@@ -19,6 +21,7 @@ public class Cliente extends Pessoa {
         this.nPorta = nPorta;
         this.cp = cp;
         this.localidade = localidade;
+        this.idCli = nextId++;
     }
 
     public String getNomeRua() {
@@ -41,6 +44,10 @@ public class Cliente extends Pessoa {
         return cp;
     }
 
+    public Integer getIdCli() {
+        return idCli;
+    }
+
     public void setCp(Integer cp) {
         this.cp = cp;
     }
@@ -53,11 +60,8 @@ public class Cliente extends Pessoa {
         this.localidade = localidade;
     }
 
-    public Integer lastId() {
-        return clientes.size();
-    }
-    public void adicionarCliente(Cliente cliente) {
-        clientes.put(lastId()+1, cliente);
+    public static void adicionarCliente(Cliente cliente) {
+        clientes.put(cliente.idCli, cliente);
     }
 
     public HashMap<Integer, Cliente> getClientes() {

@@ -2,32 +2,39 @@ package exercicios.exercicio_animais.src;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Veterinario extends Pessoa {
     private static HashMap<Integer, Veterinario> veterinarios = new HashMap<>(); // static para poder ser acedido por Gestor
     private static HashMap<Integer, ArrayList<Integer>> veterinarioClientes = new HashMap<Integer, ArrayList<Integer>>();
     private static HashMap<Integer, ArrayList<Integer>> veterinarioAnimais = new HashMap<Integer, ArrayList<Integer>>();
+    private static Integer nextId = 1;
     private Integer idOrdemVeterinarios;
-
+    private Integer idVet;
     public Veterinario(String nome, Integer telefone, String email, Integer nif, Integer idOrdemVeterinarios) {
         super(nome, telefone, email, nif);
         this.idOrdemVeterinarios = idOrdemVeterinarios;
+        this.idVet = nextId++;
     }
 
     public Integer getIdOrdemVeterinarios() {
         return idOrdemVeterinarios;
     }
 
+    public Integer getIdVet() {
+        return idVet;
+    }
+
+    public static Veterinario getVetById(Integer id){
+    return veterinarios.get(id);
+    }
+
     public void setIdOrdemVeterinarios(Integer idOrdemVeterinarios) {
         this.idOrdemVeterinarios = idOrdemVeterinarios;
     }
 
-    public Integer lastId() {
-        return veterinarios.size();
-    }
-
-    public void adicionarVeterinario(Veterinario veterinario) {
-        veterinarios.put(lastId()+1, veterinario);
+    public static void adicionarVeterinario(Veterinario veterinario) {
+        veterinarios.put(veterinario.idVet, veterinario);
     }
     public static HashMap<Integer, Veterinario> getVeterinarios() { // static para poder ser acedido por Gestor
         return veterinarios;

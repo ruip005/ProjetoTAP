@@ -3,25 +3,27 @@ package exercicios.exercicio_animais.src;
 
 import java.util.HashMap;
 
-enum Sexo {
-    MACHO, FEMEA // Enumerado para definir o sexo do animal, MACHO ou FEME
-}
-
-public abstract class Animal {
+public class Animal {
+    public enum Genero {
+        MACHO, FEMEA
+    }
     private static HashMap <Integer, Animal> animais = new HashMap<>();
+    private static Integer nextId = 1;
+    private Integer idAnimal;
     private String nome;
     private String especie;
-    private Sexo sexoAnimal;
+    private Genero genero;
     private float peso;
 
     public Animal (){
     }
 
-    public Animal (String nome, String especie, float peso, Sexo sexoAnimal){
+    public Animal (String nome, String especie, float peso, Genero sexoAnimal){
         this.nome = nome;
         this.especie = especie;
         this.peso = peso;
-        this.sexoAnimal = sexoAnimal;
+        this.genero = sexoAnimal;
+        this.idAnimal = nextId++;
     }
 
     public String getNome() {
@@ -48,20 +50,20 @@ public abstract class Animal {
         this.peso = peso;
     }
 
-    public Sexo getSexoAnimal() {
-        return sexoAnimal;
+    public Genero getSexoAnimal() {
+        return genero;
     }
 
-    public void setSexoAnimal(Sexo sexoAnimal) {
-        this.sexoAnimal = sexoAnimal;
+    public Integer getIdAnimal() {
+        return idAnimal;
     }
 
-    public Integer lastId() {
-        return animais.size();
+    public void setSexoAnimal(Genero sexoAnimal) {
+        this.genero = sexoAnimal;
     }
 
     public void adicionarAnimal(Animal animal) {
-        animais.put(lastId()+1, animal);
+        animais.put(animal.idAnimal, animal);
     }
 
     public HashMap<Integer, Animal> getAnimais() {
