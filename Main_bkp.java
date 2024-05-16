@@ -139,6 +139,7 @@ public class Main_bkp {
                     Veterinario veterinario = new Veterinario(nome, telefone, email, nif, ordem);
                     veterinario.adicionarVeterinario(veterinario);
                     System.out.println("Veterinário adicionado com sucesso!\n");
+                    menuVeterinario();
                 } catch (NullPointerException nul){
                     System.out.println("ERRO: "+nul);
                     menuVeterinario();
@@ -146,8 +147,8 @@ public class Main_bkp {
                 break;
             case 2 : //Mostar todos os Veterinários
                 try {
-                    Veterinario.getVeterinarios().forEach((k, v) -> {
-                        System.out.println("ID: "+v.getIdVet()+" | Nome: "+v.getNome()+" | Telefone: "+v.getTelefone()+" | Email: "+v.getEmail()+" | NIF: "+v.getNif()+" | Ordem: "+v.getIdOrdemVeterinarios());
+                    Veterinario.getVeterinarios().forEach((id, vet) -> {
+                        System.out.println("ID: " + vet.getIdVet() + " | Nome: " + vet.getNome() + " | Telefone: " + vet.getTelefone() + " | Email: " + vet.getEmail() + " | NIF: " + vet.getNif() + " | Ordem: " + vet.getIdOrdemVeterinarios());
                     });
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);
@@ -156,31 +157,16 @@ public class Main_bkp {
                 break;
             case 3: //Mostrar o Veterinário e seus animais
                 try {
-                    System.out.println("Qual é o ID do Veterinário?");
-                    Integer idVet = transformarNumero(scanner.nextLine());
-                    if (Veterinario.getVetById(idVet) == null) {
-                        System.out.println("Veterinário não existe");
-                        return;
-                    }
-                    System.out.println("Animais do Veterinário " + Veterinario.getVetById(idVet).getNome() + ":");
-                    Veterinario.getAnimaisVeterinario(idVet).forEach((idAnimal) -> {
-                        Animal animal1 = Animal.getAnimalById(idAnimal);
-                        System.out.println("ID: " + animal1.getIdAnimal() + " | Nome: " + animal1.getNome() + " | Espécie: " + animal1.getEspecie() + " | Peso: " + animal1.getPeso() + "kg | Sexo: " + animal1.getSexoAnimal() + " | Dono: " + animal1.getDono()+" - "+Cliente.getClienteByID(animal1.getDono()).getNome());
+                    Veterinario.getAllVeterinarioAnimais().forEach((vetId, animalId) -> {
+                        System.out.printf("ID do Veterinário: %d | Nome do Veterinário: %s | Id do Animal: %d | Nome do Animal:", Veterinario.getVeterinarioById(vetId).getIdVet(), Veterinario.getVeterinarioById(vetId).getNome(), Animal.getAnimalById(vetId).getIdAnimal(), Animal.getAnimalById(vetId).getNome());
                     });
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);
                 }
             case 4: //Mostrar o Veterinário e o Cliente
                 try {
-                    System.out.println("Qual é o ID do Veterinário?");
-                    Integer idVet = transformarNumero(scanner.nextLine());
-                    if (Veterinario.getVetById(idVet) == null) {
-                        System.out.println("Veterinário não existe");
-                        menuVeterinario();
-                    }
-                    System.out.println("Clientes do Veterinário " + Veterinario.getVetById(idVet).getNome() + ":");
-                    Veterinario.getClientesVeterinario(idVet).forEach((id) -> {
-                        System.out.println("ID: "+Cliente.getClienteByID(id).getIdCli()+" | Nome: "+Cliente.getClienteByID(id).getNome()+" | Telefone: "+Cliente.getClienteByID(id).getTelefone()+" | Email: "+Cliente.getClienteByID(id).getEmail()+" | NIF: "+Cliente.getClienteByID(id).getNif()+" | Código Postal: "+Cliente.getClienteByID(id).getCp()+" | Localidade: "+Cliente.getClienteByID(id).getLocalidade()+" | Rua: "+Cliente.getClienteByID(id).getNomeRua());
+                    Veterinario.getAllVeterinarioClientes().forEach((vetId, cliId) -> {
+                        System.out.printf("ID do Veterinário: %d | Nome do Veterinário: %s | Id do Cliente: %d | Nome do Cliente:", Veterinario.getVeterinarioById(vetId).getIdVet(), Veterinario.getVeterinarioById(vetId).getNome(), Cliente.getClienteByID(vetId).getIdCli(), Cliente.getClienteByID(vetId).getNome());
                     });
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);
@@ -190,6 +176,54 @@ public class Main_bkp {
             default:
                 System.out.println("Opção inválida. Tente novamente.");
                 menuVeterinario();
+        }
+    }
+
+    public void escolherCliente(int value){
+        switch (value) {
+            case 1: // Listar todos clientes e os seus animais
+                try {
+
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
+                    menuCliente();
+                }
+                break;
+            case 2: // Listar clientes e os seus animais com id especifico
+                try {
+                    System.out.println("Qual seria o ID do cliente?");
+                    int idCli = transformarNumero(scanner.nextLine());
+                    Cliente cliente = Cliente.getClienteByID(idCli);
+                    if (cliente == null) {
+                        System.out.println("O cliente solicitado não existe.");
+                        return;
+                    }
+                    System.out.println("Animais do cliente " + cliente.getNome() + ":");
+                    Cliente.getAnimaisCliente(idCli).forEach((idAnimal) -> {
+                        Animal animal = Animal.getAnimalById(idAnimal);
+                        System.out.println("ID: " + animal.getIdAnimal() + " | Nome: " + animal.getNome() + " | Espécie: " + animal.getEspecie() + " | Peso: " + animal.getPeso() + "kg | Sexo: " + animal.getSexoAnimal() + " | Dono: " + animal.getDono()+ " - "+Cliente.getClienteByID(animal.getDono()).getNome());
+                    });
+                    System.out.println("- - - - - - - - - - - -");
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
+                    menuCliente();
+                }
+                break;
+            case 3:
+                break;
+            default:
+        }
+    }
+
+    public void escolherAnimal(int value){
+        switch (value){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            default:
         }
     }
 }

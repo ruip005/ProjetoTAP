@@ -96,7 +96,10 @@ public class Cliente extends Pessoa {
         }
     }
 
-
+    // Retornar tudo de cliente animais
+    public static HashMap<Integer, ArrayList<Integer>> getAllClienteAnimais() {
+        return clienteAnimais;
+    }
     
     public static Cliente getClienteByID(int id) {
         if (clientes.containsKey(id)) { // Verificar se a chave existe no HashMap | static para poder ser acedido por outras classes
