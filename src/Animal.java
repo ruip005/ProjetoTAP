@@ -14,16 +14,18 @@ public class Animal {
     private String especie;
     private Genero genero;
     private float peso;
+    private Integer dono;
 
     public Animal (){
     }
 
-    public Animal (String nome, String especie, float peso, Genero sexoAnimal){
+    public Animal (String nome, String especie, float peso, Genero sexoAnimal, Integer dono){
         this.nome = nome;
         this.especie = especie;
         this.peso = peso;
         this.genero = sexoAnimal;
         this.idAnimal = nextId++;
+        this.dono = dono;
     }
 
     public String getNome() {
@@ -36,6 +38,10 @@ public class Animal {
 
     public String getEspecie() {
         return especie;
+    }
+
+    public Integer getDono() {
+        return dono;
     }
 
     public void setEspecie(String especie) {
@@ -62,19 +68,20 @@ public class Animal {
         this.genero = sexoAnimal;
     }
 
-    public void adicionarAnimal(Animal animal) {
+    public static void adicionarAnimal(Animal animal) {
+        if (Cliente.getClienteByID(animal.getDono()) == null) {
+            System.out.println("Cliente não existe");
+            return;
+        }
         animais.put(animal.idAnimal, animal);
+        Cliente.adicionarAnimalCliente(animal.getDono(), animal.getIdAnimal());
     }
 
     public HashMap<Integer, Animal> getAnimais() {
         return animais;
     }
 
-    public static Animal getAnimalById(int id) { // Verificar se a chave existe no HashMap | static para poder ser acedido por outras classes
-        if (animais.containsKey(id)) {
-            return animais.get(id);
-        } else {
-            return null;
-        }
+    public static Animal getAnimalById(int id) {
+        return animais.get(id);
     }
 }

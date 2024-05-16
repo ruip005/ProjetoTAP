@@ -69,7 +69,7 @@ public class Cliente extends Pessoa {
     }
 
     public static void adicionarAnimalCliente(Integer idCliente, Integer idAnimal) {
-        if (clientes.containsKey(idCliente) == false) {
+        if(getClienteByID(idCliente) == null) {
             System.out.println("Cliente não existe");
             return;
         }

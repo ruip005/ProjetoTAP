@@ -155,16 +155,20 @@ public class Main_bkp {
                 }
                 break;
             case 3: //Mostrar o Veterinário e seus animais
-                try{
-                    System.out.println("Qual é o ID do Animal?");
-                    Integer id = transformarNumero(scanner.nextLine());
-                    System.out.println("Veterinário: "+Veterinario.getVeterinarioById(id).getNome()+", tem os seguintes animais:");
-                    Veterinario.getAnimaisVeterinario(id).forEach(a -> {
-                        System.out.println("ID: "+Animal.getAnimalById(a).hashCode()+" | Nome: "+Animal.getAnimalById(a).getNome()+" | Espécie: "+Animal.getAnimalById(a).getEspecie()+" | Peso: "+Animal.getAnimalById(a).getPeso()+" | Sexo: "+Animal.getAnimalById(a).getSexoAnimal());
+                try {
+                    System.out.println("Qual é o ID do Veterinário?");
+                    Integer idVet = transformarNumero(scanner.nextLine());
+                    if (Veterinario.getVetById(idVet) == null) {
+                        System.out.println("Veterinário não existe");
+                        return;
+                    }
+                    System.out.println("Animais do Veterinário " + Veterinario.getVetById(idVet).getNome() + ":");
+                    Veterinario.getAnimaisVeterinario(idVet).forEach((idAnimal) -> {
+                        Animal animal1 = Animal.getAnimalById(idAnimal);
+                        System.out.println("ID: " + animal1.getIdAnimal() + " | Nome: " + animal1.getNome() + " | Espécie: " + animal1.getEspecie() + " | Peso: " + animal1.getPeso() + "kg | Sexo: " + animal1.getSexoAnimal() + " | Dono: " + animal1.getDono()+" - "+Cliente.getClienteByID(animal1.getDono()).getNome());
                     });
-                } catch (NullPointerException e){
+                } catch (Exception e){
                     System.out.println("ERRO: "+e);
-                    menuVeterinario();
                 }
             case 4: //Mostrar o Veterinário e o Cliente
                 try {
@@ -176,7 +180,7 @@ public class Main_bkp {
                     }
                     System.out.println("Clientes do Veterinário " + Veterinario.getVetById(idVet).getNome() + ":");
                     Veterinario.getClientesVeterinario(idVet).forEach((id) -> {
-                        System.out.println(Cliente.getClienteByID(id).getNome());
+                        System.out.println("ID: "+Cliente.getClienteByID(id).getIdCli()+" | Nome: "+Cliente.getClienteByID(id).getNome()+" | Telefone: "+Cliente.getClienteByID(id).getTelefone()+" | Email: "+Cliente.getClienteByID(id).getEmail()+" | NIF: "+Cliente.getClienteByID(id).getNif()+" | Código Postal: "+Cliente.getClienteByID(id).getCp()+" | Localidade: "+Cliente.getClienteByID(id).getLocalidade()+" | Rua: "+Cliente.getClienteByID(id).getNomeRua());
                     });
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);
