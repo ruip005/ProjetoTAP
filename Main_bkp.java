@@ -1,6 +1,11 @@
 package exercicios.exercicio_animais;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import exercicios.exercicio_animais.src.*;
+import exercicios.exercicio_animais.src.Intervencao.Intervencao;
+
 public class Main_bkp {
     private static Scanner scanner = new Scanner(System.in);
 
@@ -98,6 +103,22 @@ public class Main_bkp {
         }
     }
 
+    public static String transformarData(String data){
+        String formattedDate = "";
+        try {
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+            formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        } catch (ParseException e) {
+            System.out.println("Data inválida, por favor insira uma data válida [dd/MM/yyyy]");
+            String newDate = transformarData(scanner.nextLine());
+            return newDate;
+        } catch (Exception e){
+            System.out.println("ERRO: "+e);
+        }
+        // Return DIA/MES/ANO
+        return formattedDate;
+    }
+
     public static void escolher(Integer value){
         switch (value) {
             case 1:
@@ -183,7 +204,9 @@ public class Main_bkp {
         switch (value) {
             case 1: // Listar todos clientes e os seus animais
                 try {
-
+                    Cliente.getAllClienteAnimais().forEach((cliId, animalId) -> {
+                        System.out.printf("ID do Cliente: %d | Nome do Cliente: %s | Id do Animal: %d | Nome do Animal:", Cliente.getClienteByID(cliId).getIdCli(), Cliente.getClienteByID(cliId).getNome(), Animal.getAnimalById(cliId).getIdAnimal(), Animal.getAnimalById(cliId).getNome());
+                    });
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);
                     menuCliente();
@@ -217,11 +240,50 @@ public class Main_bkp {
 
     public void escolherAnimal(int value){
         switch (value){
-            case 1:
+            case 1: // Listar os animes e os seus donos
+                try {
+                    Animal.getAnimais().forEach((id, animal) -> {
+                        System.out.println("ID do Animal: " + animal.getIdAnimal() + " | Nome do Animal: " + animal.getNome() + " | ID do Dono: " + animal.getDono() + " | Nome do Dono: " + Cliente.getClienteByID(animal.getDono()).getNome());
+                    });
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
+                    menuAnimal();
+                }
                 break;
             case 2:
                 break;
             case 3:
+                break;
+            default:
+        }
+    }
+
+    public void escolherOperacao(int value){
+        switch (value){
+            case 1: // Listar os tipos de interven¸c˜ao veterin´aria que a cl´ınica realiza
+                try {
+                    System.out.println("- - - - - Intervenções - - - - -");
+                    System.out.println("1- Consulta");
+                    System.out.println("2- Cirurgia");
+                    System.out.println("3- Vacinação");
+                } catch (Exception e) {
+                    System.out.println("ERRO: " + e);
+                    menuVeterinario();
+                }
+                break;
+            case 2: // (g) Listar, por tipo, todas as interven¸c˜oes numa determinada data;
+                System.out.println("Qual é a data de início?");
+                //Date dataInicio = transformarData(scanner.nextLine());
+                //Operacao.listarIntervalo();
+
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
                 break;
             default:
         }

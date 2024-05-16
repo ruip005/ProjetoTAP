@@ -1,4 +1,7 @@
 package exercicios.exercicio_animais;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import exercicios.exercicio_animais.src.*;
 public class Main {
@@ -11,21 +14,31 @@ public class Main {
         Animal.adicionarAnimal(animal1);
         Veterinario.adicionarAnimalVeterinario(1, 1);
         try {
-            System.out.println("Qual seria o ID do cliente?");
-            int idCli = scanner.nextInt();
-            Cliente cliente = Cliente.getClienteByID(idCli);
-            if (cliente == null) {
-                System.out.println("O cliente solicitado não existe.");
-                return;
-            }
-            System.out.println("Animais do cliente " + cliente.getNome() + ":");
-            Cliente.getAnimaisCliente(idCli).forEach((idAnimal) -> {
-                Animal animal = Animal.getAnimalById(idAnimal);
-                System.out.println("ID: " + animal.getIdAnimal() + " | Nome: " + animal.getNome() + " | Espécie: " + animal.getEspecie() + " | Peso: " + animal.getPeso() + "kg | Sexo: " + animal.getSexoAnimal() + " | Dono: " + animal.getDono());
-            });
-            System.out.println("- - - - - - - - - - - -");
+            System.out.println("Qual é o tipo de intervenção que deseja realizar [CONSULTA, CIRURGIA, VACINA]?"); // To do - Enum
+            String tipoIntervencao = scanner.nextLine();
+            System.out.println("Qual é a data de inicio da intervenção [dd/MM/yyyy]?");
+            String dataInsert = verifyDate(scanner.nextLine());
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = formatter.parse(dataInsert);
+            Operacao.listarIntervalo(tipoIntervencao, date);
         } catch (Exception e){
             System.out.println("ERRO: "+e);
         }
+    }
+
+    public static String verifyDate(String data){
+        String formattedDate = "";
+        try {
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+            formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        } catch (ParseException e) {
+            System.out.println("Data inválida, por favor insira uma data válida [dd/MM/yyyy]");
+            String newDate = verifyDate(scanner.nextLine());
+            return newDate;
+        } catch (Exception e){
+            System.out.println("ERRO: "+e);
+        }
+        // Return DIA/MES/ANO
+        return formattedDate;
     }
 }

@@ -77,7 +77,7 @@ public class Animal {
         Cliente.adicionarAnimalCliente(animal.getDono(), animal.getIdAnimal());
     }
 
-    public HashMap<Integer, Animal> getAnimais() {
+    public static HashMap<Integer, Animal> getAnimais() {
         return animais;
     }
 
