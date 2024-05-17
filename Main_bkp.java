@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import exercicios.exercicio_animais.src.*;
-import exercicios.exercicio_animais.src.Intervencao.Intervencao;
+import exercicios.exercicio_animais.src.Intervencao.*;
 
 public class Main_bkp {
     private static Scanner scanner = new Scanner(System.in);
@@ -161,8 +161,6 @@ public class Main_bkp {
                     menuVeterinario();
                 } catch (NullPointerException nul){
                     System.out.println("ERRO: "+nul);
-
-                } finally {
                     menuVeterinario();
 
                 }
@@ -174,9 +172,6 @@ public class Main_bkp {
                     });
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);
-
-                }
-                finally {
                     menuVeterinario();
                 }
                 break;
@@ -198,10 +193,8 @@ public class Main_bkp {
                     Veterinario.getAllVeterinarioClientes().forEach((vetId, cliId) -> {
                         System.out.printf("ID do Veterinário: %d | Nome do Veterinário: %s | Id do Cliente: %d | Nome do Cliente:", Veterinario.getVeterinarioById(vetId).getIdVet(), Veterinario.getVeterinarioById(vetId).getNome(), Cliente.getClienteByID(vetId).getIdCli(), Cliente.getClienteByID(vetId).getNome());
                     });
-                } catch (Exception e) {
-                    System.out.println("ERRO: " + e);
-
-                } finally {
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
                     menuVeterinario();
                 }
                 break;
@@ -246,8 +239,6 @@ public class Main_bkp {
                     });
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);
-
-                } finally {
                     menuCliente();
                 }
                 break;
@@ -269,9 +260,6 @@ public class Main_bkp {
                     System.out.println("- - - - - - - - - - - -");
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);
-
-                }
-                 finally {
                     menuCliente();
                 }
                 break;
@@ -336,16 +324,13 @@ public class Main_bkp {
 
     public void escolherAnimal(int value){
         switch (value){
-            case 1: // Listar os animais e os seus donos
+            case 1: // Listar os animes e os seus donos
                 try {
                     Animal.getAnimais().forEach((id, animal) -> {
                         System.out.println("ID do Animal: " + animal.getIdAnimal() + " | Nome do Animal: " + animal.getNome() + " | ID do Dono: " + animal.getDono() + " | Nome do Dono: " + Cliente.getClienteByID(animal.getDono()).getNome());
                     });
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);
-
-                }
-                finally {
                     menuAnimal();
                 }
                 break;
@@ -431,6 +416,78 @@ public class Main_bkp {
             case 6:
                 break;
             default:
+        }
+    }
+
+    public static void agendarIntervencao() {
+        try {
+            // Selecionar o tipo de intervenção
+            System.out.println("Qual é o tipo de intervenção que deseja agendar?");
+            System.out.println("1. Consulta");
+            System.out.println("2. Vacinação");
+            System.out.println("3. Cirurgia");
+            int escolha = Integer.parseInt(scanner.nextLine());
+            Intervencao.InterventionType tipoIntervencao = null;
+            switch (escolha) {
+                case 1:
+                    tipoIntervencao = Intervencao.InterventionType.CONSULTA;
+                    break;
+                case 2:
+                    tipoIntervencao = Intervencao.InterventionType.VACINACAO;
+                    break;
+                case 3:
+                    tipoIntervencao = Intervencao.InterventionType.CIRURGIA;
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    return;
+            }
+
+            // Selecionar o animal
+            System.out.println("Qual é o ID do animal?");
+            int idAnimal = Integer.parseInt(scanner.nextLine());
+            Animal animal = Animal.getAnimalById(idAnimal);
+            if (animal == null) {
+                System.out.println("Animal não encontrado.");
+                return;
+            }
+
+            // Selecionar o veterinário
+            System.out.println("Qual é o ID do veterinário?");
+            int idVeterinario = Integer.parseInt(scanner.nextLine());
+            Veterinario veterinario = Veterinario.getVeterinarioById(idVeterinario);
+            if (veterinario == null) {
+                System.out.println("Veterinário não encontrado.");
+                return;
+            }
+
+            // Definir a data da intervenção
+            System.out.println("Qual é a data da intervenção (dd/MM/yyyy)?");
+            String dataIntervencaoStr = scanner.nextLine();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date dataIntervencao = sdf.parse(dataIntervencaoStr);
+
+            // Calcular o custo da intervenção
+            double distancia = 0.0;
+            Intervencao intervencao = null;
+            switch (tipoIntervencao) {
+                case CONSULTA:
+                    intervencao = new Consulta(veterinario, animal, distancia);
+                    break;
+                case VACINACAO:
+                    intervencao = new Vacinacao(veterinario, animal, distancia);
+                    break;
+                case CIRURGIA:
+                    intervencao = new Cirurgia(veterinario, animal, distancia);
+                    break;
+            }
+            if (intervencao != null) {
+                double custo = intervencao.calcularCusto();
+                // Apresentar o custo da intervenção
+                System.out.println("O custo da intervenção é: " + custo + "€");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao agendar intervenção: " + e.getMessage());
         }
     }
 }
