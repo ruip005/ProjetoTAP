@@ -21,6 +21,7 @@ public abstract class Intervencao {
         this.distancia = distancia;
     }
 
+
     public abstract double calcularCusto();
     public abstract double calcularDuracao();
     public abstract InterventionType getTipoIntervencao();

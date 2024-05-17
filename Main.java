@@ -13,6 +13,9 @@ import exercicios.exercicio_animais.src.Intervencao.Intervencao;
 import exercicios.exercicio_animais.src.Intervencao.Vacinacao;
 
 public class Main {
+    SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+    private static Scanner scanner = new Scanner(System.in);
+    // Classe para testar o codigo
     public static void main(String[] args) {
         Veterinario vet = new Veterinario("João", 123456789, "ruirr31@gmail.com", 123456789, 123456789);
         Veterinario.adicionarVeterinario(vet);
