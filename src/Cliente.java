@@ -108,4 +108,13 @@ public class Cliente extends Pessoa {
             return null;
         }
     }
+
+    public static Integer getClientIdByAnimalId(Integer idAnimal){
+for (Integer idCliente : clienteAnimais.keySet()){
+            if (clienteAnimais.get(idCliente).contains(idAnimal)){
+                return idCliente;
+            }
+        }
+        return null;
+    }
 }

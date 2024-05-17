@@ -1,5 +1,8 @@
 package exercicios.exercicio_animais.src;
 
+import exercicios.exercicio_animais.src.Intervencao.Intervencao;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +19,10 @@ public class Veterinario extends Pessoa {
         this.idOrdemVeterinarios = idOrdemVeterinarios;
         this.idVet = nextId++;
     }
+
+//Mostrar todas as operacoes de um Veterinário de uma determoperacoes
+
+
 
     public Integer getIdOrdemVeterinarios() {
         return idOrdemVeterinarios;
@@ -103,4 +110,13 @@ public class Veterinario extends Pessoa {
             return null;
         }
     }
+
+    public static HashMap<Integer, ArrayList<Integer>> getAllVeterinarioAnimais() {
+        return veterinarioAnimais;
+    }
+
+    public static HashMap<Integer, ArrayList<Integer>> getAllVeterinarioClientes() {
+        return veterinarioClientes;
+    }
+
 }

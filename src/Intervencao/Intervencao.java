@@ -21,7 +21,16 @@ public abstract class Intervencao {
         this.distancia = distancia;
     }
 
+
     public abstract double calcularCusto();
     public abstract double calcularDuracao();
     public abstract InterventionType getTipoIntervencao();
+    public int calcularKms(int distancia){
+        int value = Math.abs(distancia);
+        if (value == 0){
+            return 0;
+        } else {
+            return 40+value;
+        }
+    }
 }

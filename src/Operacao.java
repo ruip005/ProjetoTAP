@@ -20,18 +20,16 @@ public class Operacao {
     private int idAnimal;
     private int idCliente;
 
-    public Operacao(){}
-
-    public Operacao(LocalDate data, LocalTime hora, Intervencao.InterventionType intervencao, double custo, double duracao, int idVeterinario, int idAnimal, int idCliente) {
+    public Operacao(LocalDate data, LocalTime hora, Intervencao.InterventionType intervencao, int idVeterinario, int idAnimal, int idCliente, double custo, double duracao) {
         this.dataOp = data;
         this.hora = hora;
         this.intervencao = intervencao;
-        this.custo = custo;
-        this.duracao = duracao;
         this.idVeterinario = idVeterinario;
         this.idAnimal = idAnimal;
         this.idCliente = idCliente;
         this.idOp = nextId++;
+        this.custo = custo;
+        this.duracao = duracao;
     }
 
     public LocalDate getDataOp() {
