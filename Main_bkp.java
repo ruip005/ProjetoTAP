@@ -395,30 +395,8 @@ public class Main_bkp {
                     System.out.println("ERRO: "+e);
                 }
                 finally{
-                menuAnimal();}
-
-                break;
-            case 3: //Mostrar o ou varios Animal de um cliente.
-               try{
-                   System.out.println("Qual é o ID do Cliente?");
-                   int idCli = transformarNumero(scanner.nextLine());
-                   Cliente cliente = Cliente.getClienteByID(idCli);
-                   if (cliente == null){
-                       System.out.println("O Cliente que procura não existe.");
-                       return;
-                   }
-                   System.out.println("O(s) animal(is) do Cliente "+ cliente.getNome()+":");
-                   Cliente.getAnimaisCliente(idCli).forEach((idAnimal)->{
-                       Animal animal = Animal.getAnimalById(idAnimal);
-                       System.out.println((" ID:"+ animal.getIdAnimal()+ "Nome:" + animal.getNome()+ "Espécie :" + animal.getEspecie()+ "Peso:" + animal.getPeso()+ "Sexo:"+ animal.getSexoAnimal()+ " Dono:" + animal.getDono() + "-" + Cliente.getClienteByID(animal.getDono()).getNome()));
-                   });
-
-                } catch(Exception e){
-                   System.out.println("ERRO: "+e);
-               } finally {
-                   menuAnimal();
-               }
-
+                menuAnimal();
+                }
                 break;
             case 3: //Mostrar o ou varios Animal de um cliente.
                try{
