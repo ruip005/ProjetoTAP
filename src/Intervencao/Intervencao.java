@@ -4,19 +4,24 @@ package exercicios.exercicio_animais.src.Intervencao;
 import exercicios.exercicio_animais.src.Animal;
 import exercicios.exercicio_animais.src.Veterinario;
 
-public abstract class Intervencao { // Criar uma classe abstrata Intervencao, com 3 subclasses (Vacinacao, Consulta e Cirurgia)
+public abstract class Intervencao {
+    public enum InterventionType {
+        VACINACAO, CONSULTA, CIRURGIA
+    }
+
     protected Veterinario veterinario;
     protected Animal animal;
     protected double distancia;
+    protected InterventionType interventionType;
 
-    public Intervencao(Veterinario veterinario, Animal animal, double distancia) {
+    public Intervencao(Veterinario veterinario, Animal animal, double distancia, InterventionType interventionType) {
         this.veterinario = veterinario;
         this.animal = animal;
         this.distancia = distancia;
+        this.interventionType = interventionType;
     }
 
-    // Uma classe abstrata é uma classe que não pode ser instanciada, ou seja, não é possível criar um objeto a partir dela.
-    public abstract double calcularCusto(); // Este metodo deve ser implementado nas subclasses
-    public abstract double calcularDuracao(); // Este metodo deve ser implementado nas subclasses
-    public abstract String getTipoIntervencao(); // Este metodo deve ser implementado nas subclasses
+    public abstract double calcularCusto();
+    public abstract double calcularDuracao();
+    public abstract String getTipoIntervencao();
 }

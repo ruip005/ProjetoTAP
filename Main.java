@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import exercicios.exercicio_animais.src.*;
+import exercicios.exercicio_animais.src.Intervencao.Intervencao;
+
 public class Main {
     public static void main(String[] args) {
         Veterinario vet = new Veterinario("João", 123456789, "ruirr31@gmail.com", 123456789, 123456789);
@@ -14,7 +16,8 @@ public class Main {
         Animal.adicionarAnimal(animal1);
         Veterinario.adicionarAnimalVeterinario(1, 1);
         try {
-            System.out.println("Qual é o tipo de intervenção que deseja realizar [CONSULTA, CIRURGIA, VACINA]?"); // To do - Enum
+            Intervencao.InterventionType[] interventionTypes = Intervencao.InterventionType.values();
+            System.out.printf("Qual é o tipo de intervenção que deseja realizar [%s, %s, %s]?", interventionTypes[0], interventionTypes[1], interventionTypes[2]);
             String tipoIntervencao = scanner.nextLine();
             System.out.println("Qual é a data de inicio da intervenção [dd/MM/yyyy]?");
             String dataInsert = verifyDate(scanner.nextLine());

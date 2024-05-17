@@ -262,10 +262,11 @@ public class Main_bkp {
         switch (value){
             case 1: // Listar os tipos de interven¸c˜ao veterin´aria que a cl´ınica realiza
                 try {
+                    Intervencao.InterventionType[] interventionTypes = Intervencao.InterventionType.values();
                     System.out.println("- - - - - Intervenções - - - - -");
-                    System.out.println("1- Consulta");
-                    System.out.println("2- Cirurgia");
-                    System.out.println("3- Vacinação");
+                    System.out.printf("1 - ", interventionTypes[0]);
+                    System.out.printf("2 - ", interventionTypes[1]);
+                    System.out.printf("3 - ", interventionTypes[2]);
                 } catch (Exception e) {
                     System.out.println("ERRO: " + e);
                     menuVeterinario();
