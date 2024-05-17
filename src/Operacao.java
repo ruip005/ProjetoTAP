@@ -9,7 +9,7 @@ public class Operacao {
     private static HashMap <Integer, Operacao> operacoes = new HashMap<Integer, Operacao>();
     private Date data_inicio;
     private Date data_fim;
-    private String intervencao;
+    private Intervencao.InterventionType intervencao;
     private double custo;
     private double duracao;
     private int idVeterinario;
@@ -18,7 +18,7 @@ public class Operacao {
 
     public Operacao(){}
 
-    public Operacao(Date data_inicio, Date data_fim, String intervencao, double custo, double duracao, int idVeterinario, int idAnimal, int idCliente) {
+    public Operacao(Date data_inicio, Date data_fim, Intervencao.InterventionType intervencao, double custo, double duracao, int idVeterinario, int idAnimal, int idCliente) {
         this.data_inicio = data_inicio;
         this.data_fim = data_fim;
         this.intervencao = intervencao;
@@ -45,11 +45,11 @@ public class Operacao {
         this.data_fim = data_fim;
     }
 
-    public String getIntervencao() {
+    public Intervencao.InterventionType getIntervencao() {
         return intervencao;
     }
 
-    public void setIntervencao(String intervencao) {
+    public void setIntervencao(Intervencao.InterventionType intervencao) {
         this.intervencao = intervencao;
     }
 
@@ -96,7 +96,7 @@ public class Operacao {
         return operacoes;
     }
 
-    public static void listarIntervencoes(String intervencao, Date inicio, Date fim){
+    public static void listarIntervencoes(Intervencao.InterventionType intervencao, Date inicio, Date fim){
         for (Operacao op : operacoes.values()){
             if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(inicio) && op.getData_fim().before(fim)){ // Verificar se a intervenção é do tipo pretendido e se a data está entre o intervalo
                 System.out.println(op);
@@ -104,7 +104,7 @@ public class Operacao {
         }
     }
 
-    public static void listarIntervencoes(String intervencao, int idVeterinario){
+    public static void listarIntervencoes(Intervencao.InterventionType intervencao, int idVeterinario){
         Veterinario vet = Veterinario.getVeterinarioById(idVeterinario);
         if (vet == null){
             System.out.println("Veterinário não encontrado");
@@ -117,7 +117,7 @@ public class Operacao {
         }
     }
 
-    public static void listarIntervencoes(String intervencao, int idVeterinario, Date inicio, Date fim){
+    public static void listarIntervencoes(Intervencao.InterventionType intervencao, int idVeterinario, Date inicio, Date fim){
         Veterinario vet = Veterinario.getVeterinarioById(idVeterinario);
         if (vet == null){
             System.out.println("Veterinário não encontrado");
@@ -130,7 +130,7 @@ public class Operacao {
         }
     }
 
-    public static void listarIntervencoes(String intervencao, Integer idAnimal){
+    public static void listarIntervencoes(Intervencao.InterventionType intervencao, Integer idAnimal){
         Animal ani = Animal.getAnimalById(idAnimal);
         if (ani == null){
             System.out.println("Animal não encontrado");
@@ -143,7 +143,7 @@ public class Operacao {
         }
     }
 
-    public static void listarIntervencoesAgendadas(String intervencao, Integer idAnimal){
+    public static void listarIntervencoesAgendadas(Intervencao.InterventionType intervencao, Integer idAnimal){
         Animal ani = Animal.getAnimalById(idAnimal);
         if (ani == null){
             System.out.println("Animal não encontrado");
@@ -156,7 +156,7 @@ public class Operacao {
         }
     }
 
-    public static void listarIntervencoesHoje(String Intervencao, Integer idAnimal){
+    public static void listarIntervencoesHoje(Intervencao.InterventionType Intervencao, Integer idAnimal){
         Animal ani = Animal.getAnimalById(idAnimal);
         if (ani == null){
             System.out.println("Animal não encontrado");
@@ -169,7 +169,7 @@ public class Operacao {
         }
     }
 
-    public static void listarIntervencoes(String intervencao, Integer idAnimal, Integer idCliente, Date inicio, Date fim){
+    public static void listarIntervencoes(Intervencao.InterventionType intervencao, Integer idAnimal, Integer idCliente, Date inicio, Date fim){
         Animal ani = Animal.getAnimalById(idAnimal);
         Cliente cli = Cliente.getClienteByID(idCliente);
         if (ani == null || cli == null){
@@ -186,7 +186,7 @@ public class Operacao {
         System.out.println("Total: " + total);
     }
 
-    public static void listarIntervencoes(String intervencao, Integer idAnimal, Integer idCliente){
+    public static void listarIntervencoes(Intervencao.InterventionType intervencao, Integer idAnimal, Integer idCliente){
         Animal ani = Animal.getAnimalById(idAnimal);
         Cliente cli = Cliente.getClienteByID(idCliente);
         if (ani == null || cli == null){
@@ -204,7 +204,7 @@ public class Operacao {
         System.out.println("Total: " + total);
     }
 
-    public static void listarIntervalo(String intervencao, Date data){
+    public static void listarIntervalo(Intervencao.InterventionType intervencao, Date data){
         for (Operacao op : operacoes.values()){
             if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(data)){
                 System.out.println(op);

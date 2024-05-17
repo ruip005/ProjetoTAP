@@ -103,20 +103,17 @@ public class Main_bkp {
         }
     }
 
-    public static String transformarData(String data){
-        String formattedDate = "";
+    public static String transformarData(String data) throws ParseException { // Função para verificar se a data é válida | throws ParseException para poder ser chamada no método verifyDate
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        format.setLenient(false);
         try {
-            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
-            formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+            Date date = format.parse(data);
+            return format.format(date);
         } catch (ParseException e) {
             System.out.println("Data inválida, por favor insira uma data válida [dd/MM/yyyy]");
             String newDate = transformarData(scanner.nextLine());
             return newDate;
-        } catch (Exception e){
-            System.out.println("ERRO: "+e);
         }
-        // Return DIA/MES/ANO
-        return formattedDate;
     }
 
     public static void escolher(Integer value){
@@ -272,10 +269,7 @@ public class Main_bkp {
                     menuVeterinario();
                 }
                 break;
-            case 2: // (g) Listar, por tipo, todas as interven¸c˜oes numa determinada data;
-                System.out.println("Qual é a data de início?");
-                //Date dataInicio = transformarData(scanner.nextLine());
-                //Operacao.listarIntervalo();
+            case 2: // Criar intervencao
 
                 break;
             case 3:

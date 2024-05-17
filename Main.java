@@ -23,18 +23,36 @@ public class Main {
             String tipoIntervencao = scanner.nextLine().toUpperCase();
             while (!tipoIntervencao.equals(interventionTypes[0].toString()) && !tipoIntervencao.equals(interventionTypes[1].toString()) && !tipoIntervencao.equals(interventionTypes[2].toString())) {
                 System.out.println("Tipo de intervenção inválido, por favor insira um tipo de intervenção válido");
-                tipoIntervencao = scanner.nextLine();
+                tipoIntervencao = scanner.nextLine().toUpperCase();
             }
             System.out.println("Qual é a data de inicio da intervenção [dd/MM/yyyy]?");
             String dataInsert = verifyDate(scanner.nextLine());
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             Date date = formatter.parse(dataInsert);
-            Operacao.listarIntervalo(tipoIntervencao, date);
-        } catch (Exception e){
-            System.out.println("ERRO: "+e);
+            // Converter tipoIntervencao para Intervencao.IntervencaoType
+            Intervencao.InterventionType tipoIntervencaoEnum = Intervencao.InterventionType.valueOf(tipoIntervencao);
+            Operacao.listarIntervalo(tipoIntervencaoEnum, date);
+        // 31/02/2024
+        } catch (Exception a){
+            System.out.println("ERRO: "+a);
+        } finally {
+            System.out.println("Fim do programa");
         }
     }
 
+    public static String verifyDate(String data) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        format.setLenient(false);
+        try {
+            Date date = format.parse(data); // Verificar se a data é válida
+            return format.format(date);
+        } catch (ParseException e) {
+            System.out.println("Data inválida, por favor insira uma data válida [dd/MM/yyyy]");
+            String newDate = verifyDate(scanner.nextLine());
+            return newDate;
+            }
+    }
+    /*
     public static String verifyDate(String data){
         String formattedDate = "";
         try {
@@ -49,5 +67,5 @@ public class Main {
         }
         // Return DIA/MES/ANO
         return formattedDate;
-    }
+    }*/
 }
