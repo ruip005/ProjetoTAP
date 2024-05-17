@@ -12,16 +12,13 @@ public abstract class Intervencao {
     protected Veterinario veterinario;
     protected Animal animal;
     protected double distancia;
-    protected InterventionType interventionType;
-
-    public Intervencao(Veterinario veterinario, Animal animal, double distancia, InterventionType interventionType) {
+    public Intervencao(Veterinario veterinario, Animal animal, double distancia) {
         this.veterinario = veterinario;
         this.animal = animal;
         this.distancia = distancia;
-        this.interventionType = interventionType;
     }
 
     public abstract double calcularCusto();
     public abstract double calcularDuracao();
-    public abstract String getTipoIntervencao();
+    public abstract InterventionType getTipoIntervencao();
 }

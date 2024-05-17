@@ -5,7 +5,7 @@ import exercicios.exercicio_animais.src.Animal;
 import exercicios.exercicio_animais.src.Veterinario;
 
 public class Consulta extends Intervencao {
-
+    protected InterventionType interventionType = InterventionType.CONSULTA;
     public Consulta(Veterinario veterinario, Animal animal, double distancia) {
         super(veterinario, animal, distancia);
     }
@@ -24,7 +24,7 @@ public class Consulta extends Intervencao {
         return 0.5;
     }
 
-    public String getTipoIntervencao(){
-        return "Consulta";
+    public InterventionType getTipoIntervencao(){
+        return interventionType;
     }
 }

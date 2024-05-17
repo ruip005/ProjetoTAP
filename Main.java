@@ -3,6 +3,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.zip.DataFormatException;
+
 import exercicios.exercicio_animais.src.*;
 import exercicios.exercicio_animais.src.Intervencao.Intervencao;
 
@@ -17,8 +19,12 @@ public class Main {
         Veterinario.adicionarAnimalVeterinario(1, 1);
         try {
             Intervencao.InterventionType[] interventionTypes = Intervencao.InterventionType.values();
-            System.out.printf("Qual é o tipo de intervenção que deseja realizar [%s, %s, %s]?", interventionTypes[0], interventionTypes[1], interventionTypes[2]);
-            String tipoIntervencao = scanner.nextLine();
+            System.out.printf("Qual é o tipo de intervenção que deseja realizar [%s, %s, %s]?\n", interventionTypes[0], interventionTypes[1], interventionTypes[2]);
+            String tipoIntervencao = scanner.nextLine().toUpperCase();
+            while (!tipoIntervencao.equals(interventionTypes[0].toString()) && !tipoIntervencao.equals(interventionTypes[1].toString()) && !tipoIntervencao.equals(interventionTypes[2].toString())) {
+                System.out.println("Tipo de intervenção inválido, por favor insira um tipo de intervenção válido");
+                tipoIntervencao = scanner.nextLine();
+            }
             System.out.println("Qual é a data de inicio da intervenção [dd/MM/yyyy]?");
             String dataInsert = verifyDate(scanner.nextLine());
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

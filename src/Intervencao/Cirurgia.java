@@ -5,7 +5,7 @@ import exercicios.exercicio_animais.src.Animal;
 import exercicios.exercicio_animais.src.Veterinario;
 
 public class Cirurgia extends Intervencao {
-
+    protected InterventionType interventionType = InterventionType.CIRURGIA;
     public Cirurgia(Veterinario veterinario, Animal animal, double distancia) {
         super(veterinario, animal, distancia);
     }
@@ -24,7 +24,7 @@ public class Cirurgia extends Intervencao {
         return 2;
     }
 
-    public String getTipoIntervencao(){
-        return "Cirurgia";
+    public InterventionType getTipoIntervencao(){
+        return interventionType;
     }
 }
