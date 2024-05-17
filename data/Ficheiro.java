@@ -57,7 +57,7 @@ public class Ficheiro {
         try {
             java.io.PrintWriter output = new java.io.PrintWriter(ficheiros[0]);
             for (Operacao operacao : operacoes) {
-                output.println(operacao.hashCode() + "," + operacao.getData_inicio() + "," + operacao.getData_fim() + "," + operacao.getIntervencao() + "," + operacao.getCusto() + "," + operacao.getDuracao() + "," + operacao.getIdVeterinario() + "," + operacao.getIdAnimal() + "," + operacao.getIdCliente() + ";");
+                output.println(operacao.hashCode() + "," + operacao.getDataOp() + "," + operacao.getIntervencao() + "," + operacao.getCusto() + "," + operacao.getDuracao() + "," + operacao.getIdVeterinario() + "," + operacao.getIdAnimal() + "," + operacao.getIdCliente() + ";");
             }
             output.close();
         } catch (java.io.IOException e) {

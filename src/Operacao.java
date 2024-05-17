@@ -1,5 +1,7 @@
 package exercicios.exercicio_animais.src;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -7,8 +9,10 @@ import exercicios.exercicio_animais.src.Intervencao.*; // Importar todas as clas
 
 public class Operacao {
     private static HashMap <Integer, Operacao> operacoes = new HashMap<Integer, Operacao>();
-    private Date data_inicio;
-    private Date data_fim;
+    private static Integer nextId = 1;
+    private static Integer idOp;
+    private LocalDate dataOp;
+    private LocalTime hora;
     private Intervencao.InterventionType intervencao;
     private double custo;
     private double duracao;
@@ -18,57 +22,57 @@ public class Operacao {
 
     public Operacao(){}
 
-    public Operacao(Date data_inicio, Date data_fim, Intervencao.InterventionType intervencao, double custo, double duracao, int idVeterinario, int idAnimal, int idCliente) {
-        this.data_inicio = data_inicio;
-        this.data_fim = data_fim;
+    public Operacao(LocalDate data, LocalTime hora, Intervencao.InterventionType intervencao, double custo, double duracao, int idVeterinario, int idAnimal, int idCliente) {
+        this.dataOp = data;
+        this.hora = hora;
         this.intervencao = intervencao;
         this.custo = custo;
         this.duracao = duracao;
         this.idVeterinario = idVeterinario;
         this.idAnimal = idAnimal;
         this.idCliente = idCliente;
+        this.idOp = nextId++;
     }
 
-    public Date getData_inicio() {
-        return data_inicio;
+    public LocalDate getDataOp() {
+        return dataOp;
     }
-
-    public void setData_inicio(Date data_inicio) {
-        this.data_inicio = data_inicio;
+    public void setData(LocalDate data_inicio) {
+        this.dataOp = data_inicio;
     }
-
-    public Date getData_fim() {
-        return data_fim;
+    public LocalTime getHora() {
+        return hora;
     }
-
-    public void setData_fim(Date data_fim) {
-        this.data_fim = data_fim;
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
     }
-
     public Intervencao.InterventionType getIntervencao() {
         return intervencao;
     }
-
     public void setIntervencao(Intervencao.InterventionType intervencao) {
         this.intervencao = intervencao;
     }
-
     public double getCusto() {
         return custo;
     }
-
     public void setCusto(double custo) {
         this.custo = custo;
     }
-
     public double getDuracao() {
         return duracao;
     }
-
     public void setDuracao(double duracao) {
         this.duracao = duracao;
     }
-
+    public void setIdOp(Integer idOp) {
+        this.idOp = idOp;
+    }
+    public static Integer getIdOp() {
+        return idOp;
+    }
+    public static Operacao getOperacaoById(Integer idOp){
+        return operacoes.get(idOp);
+    }
     public int getIdVeterinario() {
         return idVeterinario;
     }
@@ -81,7 +85,7 @@ public class Operacao {
         return idCliente;
     }
 
-    public void adicionarOperacao(Operacao operacao){
+    public static void adicionarOperacao(Operacao operacao){
         Veterinario vet = Veterinario.getVeterinarioById(operacao.getIdVeterinario());
         Cliente cli = Cliente.getClienteByID(operacao.getIdCliente());
         Animal ani = Animal.getAnimalById(operacao.getIdAnimal());
@@ -89,19 +93,11 @@ public class Operacao {
             System.out.println("Veterinário, Cliente ou Animal não encontrado");
             return;
         }
-        operacoes.put(operacoes.size()+1, operacao);
+        operacoes.put(operacao.idOp, operacao);
     }
 
     public HashMap<Integer, Operacao> getOperacoes() {
         return operacoes;
-    }
-
-    public static void listarIntervencoes(Intervencao.InterventionType intervencao, Date inicio, Date fim){
-        for (Operacao op : operacoes.values()){
-            if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(inicio) && op.getData_fim().before(fim)){ // Verificar se a intervenção é do tipo pretendido e se a data está entre o intervalo
-                System.out.println(op);
-            }
-        }
     }
 
     public static void listarIntervencoes(Intervencao.InterventionType intervencao, int idVeterinario){
@@ -112,19 +108,6 @@ public class Operacao {
         }
         for (Operacao op : operacoes.values()){
             if (op.getIntervencao().equals(intervencao)){
-                System.out.println(op);
-            }
-        }
-    }
-
-    public static void listarIntervencoes(Intervencao.InterventionType intervencao, int idVeterinario, Date inicio, Date fim){
-        Veterinario vet = Veterinario.getVeterinarioById(idVeterinario);
-        if (vet == null){
-            System.out.println("Veterinário não encontrado");
-            return;
-        }
-        for (Operacao op : operacoes.values()){
-            if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(inicio) && op.getData_fim().before(fim)){ // Verificar se a intervenção é do tipo pretendido e se a data está entre o intervalo
                 System.out.println(op);
             }
         }
@@ -143,15 +126,11 @@ public class Operacao {
         }
     }
 
-    public static void listarIntervencoesAgendadas(Intervencao.InterventionType intervencao, Integer idAnimal){
-        Animal ani = Animal.getAnimalById(idAnimal);
-        if (ani == null){
-            System.out.println("Animal não encontrado");
-            return;
-        }
+    public static void listarIntervencoes(Date date){
         for (Operacao op : operacoes.values()){
-            if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(new Date())){
+            if (op.getDataOp().equals(date)){
                 System.out.println(op);
+                System.out.println("Ola mae");
             }
         }
     }
@@ -162,51 +141,8 @@ public class Operacao {
             System.out.println("Animal não encontrado");
             return;
         }
-        for (Operacao op : operacoes.values()){
-            if (op.getIntervencao().equals(Intervencao) && op.getData_inicio().equals(new Date())){
-                System.out.println(op);
-            }
-        }
-    }
-
-    public static void listarIntervencoes(Intervencao.InterventionType intervencao, Integer idAnimal, Integer idCliente, Date inicio, Date fim){
-        Animal ani = Animal.getAnimalById(idAnimal);
-        Cliente cli = Cliente.getClienteByID(idCliente);
-        if (ani == null || cli == null){
-            System.out.println("Animal ou Cliente não encontrado");
-            return;
-        }
-        double total = 0;
-        for (Operacao op : operacoes.values()){
-            if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(inicio) && op.getData_fim().before(fim)){
-                System.out.println(op);
-                total += op.getCusto();
-            }
-        }
-        System.out.println("Total: " + total);
-    }
-
-    public static void listarIntervencoes(Intervencao.InterventionType intervencao, Integer idAnimal, Integer idCliente){
-        Animal ani = Animal.getAnimalById(idAnimal);
-        Cliente cli = Cliente.getClienteByID(idCliente);
-        if (ani == null || cli == null){
-            System.out.println("Animal ou Cliente não encontrado");
-            return;
-        }
-        double total = 0;
-        for (Operacao op : operacoes.values()){
-            // depois do dia atual
-            if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(new Date())){
-                System.out.println(op);
-                total += op.getCusto();
-            }
-        }
-        System.out.println("Total: " + total);
-    }
-
-    public static void listarIntervalo(Intervencao.InterventionType intervencao, Date data){
-        for (Operacao op : operacoes.values()){
-            if (op.getIntervencao().equals(intervencao) && op.getData_inicio().after(data)){
+        for (Operacao op : operacoes.values()){ // fix me
+            if (op.getIntervencao().equals(Intervencao) && op.getDataOp().equals(new Date())){
                 System.out.println(op);
             }
         }

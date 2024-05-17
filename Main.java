@@ -1,12 +1,16 @@
 package exercicios.exercicio_animais;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.zip.DataFormatException;
 
 import exercicios.exercicio_animais.src.*;
 import exercicios.exercicio_animais.src.Intervencao.Intervencao;
+import exercicios.exercicio_animais.src.Intervencao.Vacinacao;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,21 +22,12 @@ public class Main {
         Animal.adicionarAnimal(animal1);
         Veterinario.adicionarAnimalVeterinario(1, 1);
         try {
-            Intervencao.InterventionType[] interventionTypes = Intervencao.InterventionType.values();
-            System.out.printf("Qual é o tipo de intervenção que deseja realizar [%s, %s, %s]?\n", interventionTypes[0], interventionTypes[1], interventionTypes[2]);
-            String tipoIntervencao = scanner.nextLine().toUpperCase();
-            while (!tipoIntervencao.equals(interventionTypes[0].toString()) && !tipoIntervencao.equals(interventionTypes[1].toString()) && !tipoIntervencao.equals(interventionTypes[2].toString())) {
-                System.out.println("Tipo de intervenção inválido, por favor insira um tipo de intervenção válido");
-                tipoIntervencao = scanner.nextLine().toUpperCase();
-            }
-            System.out.println("Qual é a data de inicio da intervenção [dd/MM/yyyy]?");
-            String dataInsert = verifyDate(scanner.nextLine());
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = formatter.parse(dataInsert);
-            // Converter tipoIntervencao para Intervencao.IntervencaoType
-            Intervencao.InterventionType tipoIntervencaoEnum = Intervencao.InterventionType.valueOf(tipoIntervencao);
-            Operacao.listarIntervalo(tipoIntervencaoEnum, date);
-        // 31/02/2024
+            // Criar uma intervenção
+            Intervencao intervencao = new Vacinacao(vet, animal1, 10);
+            Operacao novaOperacao = new Operacao(LocalDate.now(), LocalTime.now(), intervencao.getTipoIntervencao(), intervencao.calcularCusto(), intervencao.calcularDuracao(), vet.getIdVet(), animal1.getIdAnimal(), cliente1.getIdCli());
+            Operacao.adicionarOperacao(novaOperacao);
+            System.out.println("Operação adicionada com sucesso!");
+            System.out.println("Data: "+novaOperacao.getDataOp().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +" | Hora: " + novaOperacao.getHora().format(DateTimeFormatter.ofPattern("HH:mm")));
         } catch (Exception a){
             System.out.println("ERRO: "+a);
         } finally {

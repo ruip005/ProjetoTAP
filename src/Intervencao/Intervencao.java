@@ -4,6 +4,9 @@ package exercicios.exercicio_animais.src.Intervencao;
 import exercicios.exercicio_animais.src.Animal;
 import exercicios.exercicio_animais.src.Veterinario;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public abstract class Intervencao {
     public enum InterventionType {
         VACINACAO, CONSULTA, CIRURGIA
