@@ -110,51 +110,128 @@ public class Operacao {
     }
 
     public static void listarIntervencoes(Intervencao.InterventionType intervencao, int idVeterinario){
+        Intervencao.InterventionType tiposIntervencao[] = Intervencao.InterventionType.values();
+        if (intervencao != tiposIntervencao[0] && intervencao != tiposIntervencao[1] && intervencao != tiposIntervencao[2]){
+            System.out.println("Intervenção inválida!");
+            return;
+        }
         Veterinario vet = Veterinario.getVeterinarioById(idVeterinario);
         if (vet == null){
-            System.out.println("Veterinário não encontrado");
+            System.out.println("Veterinário não encontrado!");
             return;
         }
         for (Operacao op : operacoes.values()){
-            if (op.getIntervencao().equals(intervencao)){
-                System.out.println(op);
+            if (op.getIntervencao().equals(intervencao) && op.getIdVeterinario() == idVeterinario){
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
     }
 
-    public static void listarIntervencoes(Intervencao.InterventionType intervencao, Integer idAnimal){
-        Animal ani = Animal.getAnimalById(idAnimal);
-        if (ani == null){
-            System.out.println("Animal não encontrado");
+    public static void listarIntervencoes(Intervencao.InterventionType intervencao, Integer idVeterinario, LocalDate date){
+        Intervencao.InterventionType tiposIntervencao[] = Intervencao.InterventionType.values();
+        if (intervencao != tiposIntervencao[0] && intervencao != tiposIntervencao[1] && intervencao != tiposIntervencao[2]){
+            System.out.println("Intervenção inválida!");
+            return;
+        }
+        Veterinario vet = Veterinario.getVeterinarioById(idVeterinario);
+        if (vet == null){
+            System.out.println("Veterinário não encontrado!");
             return;
         }
         for (Operacao op : operacoes.values()){
-            if (op.getIntervencao().equals(intervencao)){
-                System.out.println(op);
+            if (op.getIntervencao().equals(intervencao) && op.getIdVeterinario() == idVeterinario && op.getDataOp().equals(date)){
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
     }
 
-    public static void listarIntervencoes(LocalDate date){
+    public static void listarIntervencoes(Intervencao.InterventionType type, LocalDate date){
+        Intervencao.InterventionType tiposIntervencao[] = Intervencao.InterventionType.values();
+        if (type != tiposIntervencao[0] && type != tiposIntervencao[1] && type != tiposIntervencao[2]){
+            System.out.println("Intervenção inválida!");
+            return;
+        }
         for (Operacao op : operacoes.values()){
-            if (op.getDataOp().equals(date)){
-                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: %d | Animal: %d | Cliente: %d | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), Animal.getAnimalById(op.getIdAnimal()).getNome(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto(), op.getDuracao());
+            if (op.getDataOp().equals(date) && op.getIntervencao().equals(type)){
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
         System.out.println("-------------------");
     }
 
-    public static void listarIntervencoesHoje(Intervencao.InterventionType Intervencao, Integer idAnimal){
+    public static void listarIntervencoes(Intervencao.InterventionType intervencao, Integer idAnimal){
+        if (intervencao != Intervencao.InterventionType.VACINACAO && intervencao != Intervencao.InterventionType.CONSULTA && intervencao != Intervencao.InterventionType.CIRURGIA){
+            System.out.println("Intervenção inválida!");
+            return;
+        }
+        Animal animal = Animal.getAnimalById(idAnimal);
+        if (animal == null){
+            System.out.println("Animal não encontrado!");
+            return;
+        }
+        for (Operacao op : operacoes.values()){
+            if (op.getIntervencao().equals(intervencao) && op.getIdAnimal() == idAnimal){
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+            }
+        }
+    }
+
+    public static void listarIntervencoesHoje(Intervencao.InterventionType intervencao, Integer idAnimal){
+        if (intervencao != Intervencao.InterventionType.VACINACAO && intervencao != Intervencao.InterventionType.CONSULTA && intervencao != Intervencao.InterventionType.CIRURGIA){
+            System.out.println("Intervenção inválida!");
+            return;
+        }
+        Animal animal = Animal.getAnimalById(idAnimal);
+        if (animal == null){
+            System.out.println("Animal não encontrado!");
+            return;
+        }
+        for (Operacao op : operacoes.values()){
+            if (op.getIntervencao().equals(intervencao) && op.getIdAnimal() == idAnimal && op.getDataOp().equals(LocalDate.now())){
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+            }
+        }
+    }
+
+    public static void listarIntervencoesFuturas(Intervencao.InterventionType intervencao, Integer idAnimal) {
+        Intervencao.InterventionType tiposIntervencao[] = Intervencao.InterventionType.values();
+        if (intervencao != tiposIntervencao[0] && intervencao != tiposIntervencao[1] && intervencao != tiposIntervencao[2]) {
+            System.out.println("Intervenção inválida!");
+            return;
+        }
         Animal ani = Animal.getAnimalById(idAnimal);
-        if (ani == null){
+        if (ani == null) {
             System.out.println("Animal não encontrado");
             return;
         }
-        for (Operacao op : operacoes.values()){ // fix me
-            if (op.getIntervencao().equals(Intervencao) && op.getDataOp().equals(new Date())){
-                System.out.println(op);
+        for (Operacao op : operacoes.values()) {
+            if (op.getIntervencao().equals(intervencao) && op.getIdAnimal() == idAnimal && op.getDataOp().isAfter(LocalDate.now())) {
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto() + "€", op.getDuracao() + "h");
             }
         }
+    }
+
+    public static void listarFaturacao(Intervencao.InterventionType intervencao, Integer idAnimal, Integer idCliente, Integer dias){
+        if (intervencao != Intervencao.InterventionType.VACINACAO && intervencao != Intervencao.InterventionType.CONSULTA && intervencao != Intervencao.InterventionType.CIRURGIA){
+            System.out.println("Intervenção inválida!");
+            return;
+        }
+        Animal animal = Animal.getAnimalById(idAnimal);
+        Cliente cliente = Cliente.getClienteByID(idCliente);
+        if (animal == null || cliente == null){
+            System.out.println("Animal ou Cliente não encontrado!");
+            return;
+        }
+        double total = 0;
+        for (Operacao op : operacoes.values()){
+            // Listar, por tipo de interven¸c˜ao, por animal e por cliente, a fatura¸c˜ao efetuada
+            //(passada (dias antes de X) e presente (dia X)) e mostrar a soma total
+            if (op.getIntervencao().equals(intervencao) && op.getIdAnimal() == idAnimal && op.getIdCliente() == idCliente && op.getDataOp().isAfter(LocalDate.now().minusDays(dias))){
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+                total += op.getCusto();
+            }
+        }
+        System.out.println("Total: "+total+"€");
     }
 
 }

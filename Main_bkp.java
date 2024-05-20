@@ -501,6 +501,7 @@ public class Main_bkp {
                         intervencao = new Cirurgia(vetOp, animalOp, distancia);
                     }
                     Operacao operacao = new Operacao(dataMarcada, horaMarcada, intervencao.getTipoIntervencao(), idVeterinario, idAnimal, Cliente.getClientIdByAnimalId(idAnimal), intervencao.calcularCusto(), intervencao.calcularDuracao());
+                    Operacao.adicionarOperacao(operacao);
                     System.out.println("Operaçao criada com sucesso");
                 } catch (Exception a){
                     System.out.println("ERRO: "+a);
@@ -522,7 +523,7 @@ public class Main_bkp {
                     menuVeterinario();
                 }
                 break;
-            case 3://Mostrar a Intervenção de um Animal.
+            case 3://Mostrar a Intervenção de um Animal. | FIX ME !!!
                 try{
                     System.out.println("Qual é o ID do Animal?");
                     int idAnimal= transformarNumero(scanner.nextLine());
@@ -549,18 +550,162 @@ public class Main_bkp {
                         tipoIntervencao = scanner.nextLine().toUpperCase();
                     }
                     System.out.println("Qual é a data da procura? [dd/MM/yyyy]");
-                    System.out.println("Qual seria a data da intervenção? [dd/MM/yyyy]");
                     LocalDate dataMarcada = LocalDate.parse(transformarData(scanner.nextLine()), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                    Operacao.listarIntervencoes(dataMarcada);
+                    Operacao.listarIntervencoes(Intervencao.InterventionType.valueOf(tipoIntervencao), dataMarcada);
                 } catch (ParseException e){
                     System.out.println("ERRO: "+e);
                 } finally {
                     menuOperacao();
                 }
                 break;
-            case 5:
+            case 5: // Listar, por tipo, todas as interven¸c˜oes de um veterin´ario
+                try {
+                    Intervencao.InterventionType[] tiposIntervencao = Intervencao.InterventionType.values();
+                    System.out.println("Qual seria o tipo de intervenção? [VACINACAO, CONSULTA, CIRURGIA]");
+                    String tipoIntervencao = scanner.nextLine().toUpperCase();
+                    while (!tipoIntervencao.equals(tiposIntervencao[0].toString()) && !tipoIntervencao.equals(tiposIntervencao[1].toString()) && !tipoIntervencao.equals(tiposIntervencao[2].toString())) {
+                        System.out.println("Tipo de intervenção inválido, por favor insira um tipo de intervenção válido [VACINACAO, CONSULTA, CIRURGIA]");
+                        tipoIntervencao = scanner.nextLine().toUpperCase();
+                    }
+                    System.out.println("Qual é o ID do veterinário?");
+                    int idVeterinario = transformarNumero(scanner.nextLine());
+                    Veterinario vet = Veterinario.getVeterinarioById(idVeterinario);
+                    if (vet == null) {
+                        System.out.println("Veterinário não encontrado!");
+                        return;
+                    }
+                    Operacao.listarIntervencoes(Intervencao.InterventionType.valueOf(tipoIntervencao), idVeterinario);
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
+                } finally {
+                    menuOperacao();
+                }
                 break;
-            case 6:
+            case 6: //  Listar, por tipo, todas as interven¸c˜oes de um veterin´ario numa determinada
+                try {
+                    Intervencao.InterventionType[] tiposIntervencao = Intervencao.InterventionType.values();
+                    System.out.println("Qual seria o tipo de intervenção? [VACINACAO, CONSULTA, CIRURGIA]");
+                    String tipoIntervencao = scanner.nextLine().toUpperCase();
+                    while (!tipoIntervencao.equals(tiposIntervencao[0].toString()) && !tipoIntervencao.equals(tiposIntervencao[1].toString()) && !tipoIntervencao.equals(tiposIntervencao[2].toString())) {
+                        System.out.println("Tipo de intervenção inválido, por favor insira um tipo de intervenção válido [VACINACAO, CONSULTA, CIRURGIA]");
+                        tipoIntervencao = scanner.nextLine().toUpperCase();
+                    }
+                    System.out.println("Qual é o ID do veterinário?");
+                    int idVeterinario = transformarNumero(scanner.nextLine());
+                    Veterinario vet = Veterinario.getVeterinarioById(idVeterinario);
+                    if (vet == null) {
+                        System.out.println("Veterinário não encontrado!");
+                        return;
+                    }
+                    System.out.println("Qual é a data da procura? [dd/MM/yyyy]");
+                    LocalDate dataMarcada = LocalDate.parse(transformarData(scanner.nextLine()), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    Operacao.listarIntervencoes(Intervencao.InterventionType.valueOf(tipoIntervencao), idVeterinario, dataMarcada);
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
+                } finally {
+                    menuOperacao();
+                }
+                break;
+            case 7: //Listar, por tipo, todas as interven¸c˜oes passadas de um animal;
+                try {
+                    Intervencao.InterventionType[] tiposIntervencao = Intervencao.InterventionType.values();
+                    System.out.println("Qual seria o tipo de intervenção? [VACINACAO, CONSULTA, CIRURGIA]");
+                    String tipoIntervencao = scanner.nextLine().toUpperCase();
+                    while (!tipoIntervencao.equals(tiposIntervencao[0].toString()) && !tipoIntervencao.equals(tiposIntervencao[1].toString()) && !tipoIntervencao.equals(tiposIntervencao[2].toString())) {
+                        System.out.println("Tipo de intervenção inválido, por favor insira um tipo de intervenção válido [VACINACAO, CONSULTA, CIRURGIA]");
+                        tipoIntervencao = scanner.nextLine().toUpperCase();
+                    }
+                    System.out.println("Qual é o ID do animal?");
+                    int idAnimal = transformarNumero(scanner.nextLine());
+                    Animal animal = Animal.getAnimalById(idAnimal);
+                    if (animal == null) {
+                        System.out.println("Animal não encontrado!");
+                        return;
+                    }
+                    Operacao.listarIntervencoes(Intervencao.InterventionType.valueOf(tipoIntervencao), idAnimal);
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
+                } finally {
+                    menuOperacao();
+                }
+                break;
+            case 8: // Listar, por tipo, todas as interven¸c˜oes de hoje de um animal;
+                try {
+                    Intervencao.InterventionType[] tiposIntervencao = Intervencao.InterventionType.values();
+                    System.out.println("Qual seria o tipo de intervenção? [VACINACAO, CONSULTA, CIRURGIA]");
+                    String tipoIntervencao = scanner.nextLine().toUpperCase();
+                    while (!tipoIntervencao.equals(tiposIntervencao[0].toString()) && !tipoIntervencao.equals(tiposIntervencao[1].toString()) && !tipoIntervencao.equals(tiposIntervencao[2].toString())) {
+                        System.out.println("Tipo de intervenção inválido, por favor insira um tipo de intervenção válido [VACINACAO, CONSULTA, CIRURGIA]");
+                        tipoIntervencao = scanner.nextLine().toUpperCase();
+                    }
+                    System.out.println("Qual é o ID do animal?");
+                    int idAnimal = transformarNumero(scanner.nextLine());
+                    Animal animal = Animal.getAnimalById(idAnimal);
+                    if (animal == null) {
+                        System.out.println("Animal não encontrado!");
+                        return;
+                    }
+                    Operacao.listarIntervencoesHoje(Intervencao.InterventionType.valueOf(tipoIntervencao), idAnimal);
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
+                } finally {
+                    menuOperacao();
+                }
+                break;
+            case 9: // Listar, por tipo, todas as interven¸c˜oes agendadas de um animal
+                try {
+                    Intervencao.InterventionType[] tiposIntervencao = Intervencao.InterventionType.values();
+                    System.out.println("Qual seria o tipo de intervenção? [VACINACAO, CONSULTA, CIRURGIA]");
+                    String tipoIntervencao = scanner.nextLine().toUpperCase();
+                    while (!tipoIntervencao.equals(tiposIntervencao[0].toString()) && !tipoIntervencao.equals(tiposIntervencao[1].toString()) && !tipoIntervencao.equals(tiposIntervencao[2].toString())) {
+                        System.out.println("Tipo de intervenção inválido, por favor insira um tipo de intervenção válido [VACINACAO, CONSULTA, CIRURGIA]");
+                        tipoIntervencao = scanner.nextLine().toUpperCase();
+                    }
+                    System.out.println("Qual é o ID do animal?");
+                    int idAnimal = transformarNumero(scanner.nextLine());
+                    Animal animal = Animal.getAnimalById(idAnimal);
+                    if (animal == null) {
+                        System.out.println("Animal não encontrado!");
+                        return;
+                    }
+                    Operacao.listarIntervencoesFuturas(Intervencao.InterventionType.valueOf(tipoIntervencao), idAnimal);
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
+                } finally {
+                    menuOperacao();
+                }
+                break;
+            case 10: // Listar, por tipo de interven¸c˜ao, por animal e por cliente, a fatura¸c˜ao efetuada (passada (dias antes de X) e presente (dia X)) e mostrar a soma total
+                try {
+                    Intervencao.InterventionType[] tiposIntervencao = Intervencao.InterventionType.values();
+                    System.out.println("Qual seria o tipo de intervenção? [VACINACAO, CONSULTA, CIRURGIA]");
+                    String tipoIntervencao = scanner.nextLine().toUpperCase();
+                    while (!tipoIntervencao.equals(tiposIntervencao[0].toString()) && !tipoIntervencao.equals(tiposIntervencao[1].toString()) && !tipoIntervencao.equals(tiposIntervencao[2].toString())) {
+                        System.out.println("Tipo de intervenção inválido, por favor insira um tipo de intervenção válido [VACINACAO, CONSULTA, CIRURGIA]");
+                        tipoIntervencao = scanner.nextLine().toUpperCase();
+                    }
+                    System.out.println("Qual é o ID do animal?");
+                    int idAnimal = transformarNumero(scanner.nextLine());
+                    Animal animal = Animal.getAnimalById(idAnimal);
+                    if (animal == null) {
+                        System.out.println("Animal não encontrado!");
+                        return;
+                    }
+                    System.out.println("Qual é o ID do cliente?");
+                    int idCliente = transformarNumero(scanner.nextLine());
+                    Cliente cliente = Cliente.getClienteByID(idCliente);
+                    if (cliente == null) {
+                        System.out.println("Cliente não encontrado!");
+                        return;
+                    }
+                    System.out.println("Qual é o número de dias?");
+                    int dias = transformarNumero(scanner.nextLine());
+                    Operacao.listarFaturacao(Intervencao.InterventionType.valueOf(tipoIntervencao), idAnimal, idCliente, dias);
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
+                } finally {
+                    menuOperacao();
+                }
                 break;
             default:
         }
