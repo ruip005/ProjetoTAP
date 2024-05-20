@@ -77,6 +77,17 @@ public class Animal {
         Cliente.adicionarAnimalCliente(animal.getDono(), animal.getIdAnimal());
     }
 
+    public static void apagarAnimal(Integer idAnimal) {
+        if (animais.containsKey(idAnimal)) {
+            animais.remove(idAnimal);
+            Cliente.apagarAnimal(idAnimal);
+            Veterinario.apagarAnimal(idAnimal);
+            System.out.println("Animal apagado com sucesso");
+        } else {
+            System.out.println("Animal não existe");
+        }
+    }
+
     public static HashMap<Integer, Animal> getAnimais() {
         return animais;
     }

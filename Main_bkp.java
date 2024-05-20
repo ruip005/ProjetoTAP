@@ -49,6 +49,7 @@ public class Main_bkp {
         System.out.println("2- Mostrar todos os Animais."); // TO DO - Não pergunta no enunciado mas convem fazer
         System.out.println("3- Mostrar o Animal de um Cliente."); // TO DO - Pergunta duplicada
         System.out.println("4- Mostrar os Animais de um Cliente."); // TO DO - Pergunta duplicada Edited
+        System.out.println("5- Apagar um Animal.");
         System.out.println("0- Sair.");
     }
 
@@ -494,6 +495,22 @@ public class Main_bkp {
                } finally {
                    menuAnimal();
                }
+                break;
+            case 5: // Apagar o animal dos dicionarios
+                try {
+                    System.out.println("Qual é o ID do Animal?");
+                    int idAnimal = transformarNumero(scanner.nextLine());
+                    Animal animal = Animal.getAnimalById(idAnimal);
+                    if (animal == null){
+                        System.out.println("O Animal que procura não existe.");
+                        return;
+                    }
+                    Animal.apagarAnimal(idAnimal);
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
+                } finally {
+                    menuAnimal();
+                }
                 break;
             case 0:
                 menuPrincipal();

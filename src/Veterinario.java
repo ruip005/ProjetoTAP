@@ -122,6 +122,15 @@ public class Veterinario extends Pessoa {
                 '}';
     }*/
 
+    public static void apagarAnimal(Integer idAnimal){
+        if (veterinarioAnimais.containsKey(idAnimal)){
+            veterinarioAnimais.remove(idAnimal);
+            System.out.println("Animal apagado com sucesso");
+        } else {
+            System.out.println("Animal não existe");
+        }
+    }
+
     public static HashMap<Integer, ArrayList<Integer>> getAllVeterinarioAnimais() {
         return veterinarioAnimais;
     }

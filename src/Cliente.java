@@ -109,8 +109,19 @@ public class Cliente extends Pessoa {
         }
     }
 
+    public static void apagarAnimal(Integer idAnimal) {
+        for (Integer idCliente : clienteAnimais.keySet()) {
+            if (clienteAnimais.get(idCliente).contains(idAnimal)) {
+                clienteAnimais.get(idCliente).remove(idAnimal);
+                System.out.println("Animal apagado com sucesso");
+                return;
+            }
+        }
+        System.out.println("Animal não existe");
+    }
+
     public static Integer getClientIdByAnimalId(Integer idAnimal){
-for (Integer idCliente : clienteAnimais.keySet()){
+        for (Integer idCliente : clienteAnimais.keySet()){
             if (clienteAnimais.get(idCliente).contains(idAnimal)){
                 return idCliente;
             }
