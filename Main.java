@@ -73,7 +73,7 @@ public class Main {
             }
             System.out.println("Qual a data da intervenção? [dd/MM/yyyy]");
             LocalDate dataMarcada1 = LocalDate.parse(verifyDate(scanner.nextLine()), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            Operacao.listarIntervencoes(dataMarcada1);
+            //Operacao.listarIntervencoes(dataMarcada1);
             /////////////////////////
         } catch (Exception a){
             System.out.println("ERRO: "+a);
