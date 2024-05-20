@@ -20,6 +20,13 @@ public class Main_bkp {
 
     public static void main(String[] args) {
         Ficheiro.criarFicheiros();
+        Ficheiro.carregarDados("data/Veterinarios.txt");
+        Ficheiro.carregarDados("data/Clientes.txt");
+        Ficheiro.carregarDados("data/Animais.txt");
+        Ficheiro.carregarDados("data/Operacoes.txt");
+        Ficheiro.carregarDados("data/VeterinarioClientes.txt");
+        Ficheiro.carregarDados("data/VeterinarioAnimais.txt");
+        Ficheiro.carregarDados("data/ClientesAnimais.txt");
         menuPrincipal();
     }
     public static void menuVeterinario(){
@@ -212,7 +219,7 @@ public class Main_bkp {
                     System.out.println("ERRO: "+nul);
                 } finally {
                     menuVeterinario();
-
+                    saveAll();
                 }
                 break;
             case 2 : //Mostar todos os Veterinários
@@ -326,6 +333,7 @@ public class Main_bkp {
                     } else {
                         menuCliente();
                     }
+                    saveAll();
                 } catch (NullPointerException nul){
                 System.out.println("ERRO: "+nul);
                 menuCliente();
@@ -448,6 +456,7 @@ public class Main_bkp {
                     System.out.println("ERRO: "+e);
                 } finally {
                     menuAnimal();
+                    saveAll();
                 }
                 break;
             case 2: //Mostrar todos os Animais.
@@ -510,6 +519,7 @@ public class Main_bkp {
                     System.out.println("ERRO: "+e);
                 } finally {
                     menuAnimal();
+                    saveAll();
                 }
                 break;
             case 0:
@@ -565,7 +575,8 @@ public class Main_bkp {
                 } catch (Exception a){
                     System.out.println("ERRO: "+a);
                 } finally {
-                    System.out.println("Fim do programa");
+                    menuOperacao();
+                    saveAll();
                 }
                 break;
             case 2:// Listar os tipos de interven¸c˜ao veterin´aria que a cl´ınica realiza
@@ -804,5 +815,15 @@ public class Main_bkp {
                 System.out.println("Opção inválida. Tente novamente.");
                 menuOperacao();
         }
+    }
+
+    public static void saveAll(){
+        Ficheiro.escreverFicheiro(Veterinario.getVeterinarios(), "data/Veterinarios.txt");
+        Ficheiro.escreverFicheiro(Cliente.getClientes(), "data/Clientes.txt");
+        Ficheiro.escreverFicheiro(Animal.getAnimais(), "data/Animais.txt");
+        Ficheiro.escreverFicheiro(Operacao.getOperacoes(), "data/Operacoes.txt");
+        Ficheiro.escreverFicheiro(Veterinario.getAllVeterinarioAnimais(), "data/VeterinarioAnimais.txt");
+        Ficheiro.escreverFicheiro(Veterinario.getAllVeterinarioClientes(), "data/VeterinarioClientes.txt");
+        Ficheiro.escreverFicheiro(Cliente.getAllClienteAnimais(), "data/ClienteAnimais.txt");
     }
 }

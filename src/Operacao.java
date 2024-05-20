@@ -111,7 +111,7 @@ public class Operacao {
         System.out.println("Operação adicionada com sucesso");
     }
 
-    public HashMap<Integer, Operacao> getOperacoes() {
+    public static HashMap<Integer, Operacao> getOperacoes() {
         return operacoes;
     }
 
