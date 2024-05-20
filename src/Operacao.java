@@ -93,6 +93,15 @@ public class Operacao {
             System.out.println("Veterinário, Cliente ou Animal não encontrado");
             return;
         }
+        // se hora for antes das 9 ou depois das 17:30
+        if (operacao.hora == null || operacao.hora.isBefore(LocalTime.of(9, 0)) || operacao.hora.isAfter(LocalTime.of(17, 30))){
+            System.out.println("Hora inválida");
+            return;
+            // Se a operacao for cirurgia então a hora tem que ser entre as 9 e as 16:00
+        } else if (operacao.intervencao == Intervencao.InterventionType.CIRURGIA && (operacao.hora.isBefore(LocalTime.of(9, 0)) || operacao.hora.isAfter(LocalTime.of(16, 0)))){
+            System.out.println("Hora inválida");
+            return;
+        }
         operacoes.put(operacao.idOp, operacao);
     }
 
@@ -126,13 +135,13 @@ public class Operacao {
         }
     }
 
-    public static void listarIntervencoes(Date date){
+    public static void listarIntervencoes(LocalDate date){
         for (Operacao op : operacoes.values()){
             if (op.getDataOp().equals(date)){
-                System.out.println(op);
-                System.out.println("Ola mae");
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: %d | Animal: %d | Cliente: %d | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), Animal.getAnimalById(op.getIdAnimal()).getNome(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto(), op.getDuracao());
             }
         }
+        System.out.println("-------------------");
     }
 
     public static void listarIntervencoesHoje(Intervencao.InterventionType Intervencao, Integer idAnimal){

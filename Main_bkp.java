@@ -162,6 +162,9 @@ public class Main_bkp {
 
     public static void escolherVeterinario(int Value){
         switch (Value){
+            case 0:
+                menuPrincipal();
+                break;
             case 1: // Adicionar veterinario
                 try {
                     System.out.println("Qual é o nome do Veterinário?");
@@ -239,32 +242,7 @@ public class Main_bkp {
                 } finally {
                     menuVeterinario();
                 }
-
-
                 break;
-
-            case 5: //Mostrar todas as intervenções de um Veterinário de uma determinada data.
-                try{
-                    System.out.println("Qual é a data de inicio?");
-                    String dataInicio = transformarData(scanner.nextLine());
-                    System.out.println("Qual é a data de fim?");
-                    String dataFim =transformarData(scanner.nextLine());
-                    //Veterinario.getVeterinarioIntervencoes(dataInicio,dataFim).forEach((id,Intervencao) -> {
-                    //    System.out.println("ID:" + Intervencao.);
-                    //;
-                } catch (Exception e){
-                    System.out.println("ERRO: "+e);
-                } finally {
-                    menuVeterinario();
-                }
-
-
-                break;
-
-            case 0:
-                menuPrincipal();
-                break;
-
             default:
 
                 System.out.println("Opção inválida. Tente novamente.");
@@ -520,7 +498,24 @@ public class Main_bkp {
                     menuOperacao();
                 }
                 break;
-            case 4:
+            case 4: // Listar, por tipo, todas as interven¸c˜oes numa determinada data;
+                try {
+                    Intervencao.InterventionType[] tiposIntervencao = Intervencao.InterventionType.values();
+                    System.out.println("Qual seria o tipo de intervenção? [VACINACAO, CONSULTA, CIRURGIA]");
+                    String tipoIntervencao = scanner.nextLine().toUpperCase();
+                    while (!tipoIntervencao.equals(tiposIntervencao[0].toString()) && !tipoIntervencao.equals(tiposIntervencao[1].toString()) && !tipoIntervencao.equals(tiposIntervencao[2].toString())) {
+                        System.out.println("Tipo de intervenção inválido, por favor insira um tipo de intervenção válido [VACINACAO, CONSULTA, CIRURGIA]");
+                        tipoIntervencao = scanner.nextLine().toUpperCase();
+                    }
+                    System.out.println("Qual é a data da procura? [dd/MM/yyyy]");
+                    System.out.println("Qual seria a data da intervenção? [dd/MM/yyyy]");
+                    LocalDate dataMarcada = LocalDate.parse(transformarData(scanner.nextLine()), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    Operacao.listarIntervencoes(dataMarcada);
+                } catch (ParseException e){
+                    System.out.println("ERRO: "+e);
+                } finally {
+                    menuOperacao();
+                }
                 break;
             case 5:
                 break;

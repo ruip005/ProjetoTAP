@@ -61,7 +61,20 @@ public class Main {
                 intervencao = new Cirurgia(vetOp, animalOp, Integer.parseInt(distancia));
             }
             Operacao operacao = new Operacao(dataMarcada, horaMarcada, intervencao.getTipoIntervencao(), idVeterinario, idAnimal, Cliente.getClientIdByAnimalId(idAnimal), intervencao.calcularCusto(), intervencao.calcularDuracao());
+            Operacao.adicionarOperacao(operacao);
             System.out.println("Operaçao criada com sucesso");
+            //////////////////////////
+            //Intervencao.InterventionType []tiposIntervencao = Intervencao.InterventionType.values();
+            System.out.println("Qual seria o tipo de intervenção? [VACINACAO, CONSULTA, CIRURGIA]");
+            String tipoIntervencao1 = scanner.nextLine().toUpperCase();
+            while(!tipoIntervencao1.equals(tiposIntervencao[0].toString()) && !tipoIntervencao1.equals(tiposIntervencao[1].toString()) && !tipoIntervencao1.equals(tiposIntervencao[2].toString())){
+                System.out.println("Tipo de intervenção inválido, por favor insira um tipo de intervenção válido [VACINACAO, CONSULTA, CIRURGIA]");
+                tipoIntervencao1 = scanner.nextLine().toUpperCase();
+            }
+            System.out.println("Qual a data da intervenção? [dd/MM/yyyy]");
+            LocalDate dataMarcada1 = LocalDate.parse(verifyDate(scanner.nextLine()), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            Operacao.listarIntervencoes(dataMarcada1);
+            /////////////////////////
         } catch (Exception a){
             System.out.println("ERRO: "+a);
         } finally {
