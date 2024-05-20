@@ -297,7 +297,7 @@ public class Main_bkp {
                     System.out.println("Qual é o NIF do Cliente?");
                     Integer nif = transformarNumero(scanner.nextLine());
                     while (nif<91000000||nif>999999999){
-                        System.out.println("Número invlaido .----");
+                        System.out.println("Número inválido");
                         nif = transformarNumero(scanner.nextLine());
                     }
                     System.out.println("Qual é o nome da Rua do Cliente?");
@@ -314,13 +314,20 @@ public class Main_bkp {
                     String localidade = transformarString(scanner.nextLine());
                     Cliente cliente = new Cliente(nome, telefone, email, nif, nomeRua,nPorta,cp,localidade);
                     Cliente.adicionarCliente(cliente);
-                }
-                catch (NullPointerException nul){
+                    System.out.println("Deseja adicionar um animal? [S/N]");
+                    String resposta = scanner.nextLine().toUpperCase();
+                    while (!resposta.equals("S") || !resposta.equals("N")){ // fix me
+                        System.out.println("Resposta inválida. Por favor insira uma resposta válida [S/N]");
+                        resposta = scanner.nextLine().toUpperCase();
+                    }
+                    if (resposta.equals("S")) {
+                        escolherAnimal(1);
+                    } else {
+                        menuCliente();
+                    }
+                } catch (NullPointerException nul){
                 System.out.println("ERRO: "+nul);
-
-                } finally {
-                    menuCliente();
-
+                menuCliente();
                 }
                 break;
             case 2: // Mostrar todos os clientes
