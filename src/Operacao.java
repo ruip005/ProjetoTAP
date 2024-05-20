@@ -93,16 +93,24 @@ public class Operacao {
             System.out.println("Veterinário, Cliente ou Animal não encontrado");
             return;
         }
+        if (operacao.dataOp == null || operacao.dataOp.isBefore(LocalDate.now())){
+            System.out.println("A data não pode ser nula ou anterior à data atual");
+            return;
+        }
         // se hora for antes das 9 ou depois das 17:30
         if (operacao.hora == null || operacao.hora.isBefore(LocalTime.of(9, 0)) || operacao.hora.isAfter(LocalTime.of(17, 30))){
             System.out.println("Hora inválida");
             return;
-            // Se a operacao for cirurgia então a hora tem que ser entre as 9 e as 16:00
-        } else if (operacao.intervencao == Intervencao.InterventionType.CIRURGIA && (operacao.hora.isBefore(LocalTime.of(9, 0)) || operacao.hora.isAfter(LocalTime.of(16, 0)))){
+        } else if ((operacao.intervencao == Intervencao.InterventionType.VACINACAO || operacao.intervencao == Intervencao.InterventionType.CONSULTA) && (operacao.hora.isAfter(LocalTime.of(12, 30)) && operacao.hora.isBefore(LocalTime.of(14, 0))) || (operacao.intervencao == Intervencao.InterventionType.CIRURGIA && (operacao.hora.isAfter(LocalTime.of(11, 00)) && operacao.hora.isBefore(LocalTime.of(14, 0))))) {
+            System.out.println("Infelizmente estamos em horário de almoço");
+            return;
+        } else if (operacao.intervencao == Intervencao.InterventionType.CIRURGIA && (operacao.hora.isBefore(LocalTime.of(9, 0)) || operacao.hora.isAfter(LocalTime.of(16, 0)))) {
             System.out.println("Hora inválida");
             return;
         }
+        validarOperacao(operacao.idVeterinario, operacao.idAnimal, operacao.dataOp, operacao.hora, operacao.duracao);
         operacoes.put(operacao.idOp, operacao);
+        System.out.println("Operação adicionada com sucesso");
     }
 
     public HashMap<Integer, Operacao> getOperacoes() {
@@ -125,6 +133,7 @@ public class Operacao {
                 System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
+        System.out.println("-------------------");
     }
 
     public static void listarIntervencoes(Intervencao.InterventionType intervencao, Integer idVeterinario, LocalDate date){
@@ -143,6 +152,7 @@ public class Operacao {
                 System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
+        System.out.println("-------------------");
     }
 
     public static void listarIntervencoes(Intervencao.InterventionType type, LocalDate date){
@@ -174,6 +184,7 @@ public class Operacao {
                 System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
+        System.out.println("-------------------");
     }
 
     public static void listarIntervencoesHoje(Intervencao.InterventionType intervencao, Integer idAnimal){
@@ -191,6 +202,7 @@ public class Operacao {
                 System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
+        System.out.println("-------------------");
     }
 
     public static void listarIntervencoesFuturas(Intervencao.InterventionType intervencao, Integer idAnimal) {
@@ -209,6 +221,7 @@ public class Operacao {
                 System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto() + "€", op.getDuracao() + "h");
             }
         }
+        System.out.println("-------------------");
     }
 
     public static void listarFaturacao(Intervencao.InterventionType intervencao, Integer idAnimal, Integer idCliente, Integer dias){
@@ -232,6 +245,47 @@ public class Operacao {
             }
         }
         System.out.println("Total: "+total+"€");
+    }
+
+    // // Listar, por tipo de interven¸c˜ao, por animal e por cliente, a fatura¸c˜ao agendada(dias agendados depois do dia X) e mostrar a soma total;
+    public static void listarFaturacaoAgendada(Intervencao.InterventionType intervencao, Integer idAnimal, Integer idCliente, Integer dias){
+        if (intervencao != Intervencao.InterventionType.VACINACAO && intervencao != Intervencao.InterventionType.CONSULTA && intervencao != Intervencao.InterventionType.CIRURGIA){
+            System.out.println("Intervenção inválida!");
+            return;
+        }
+        Animal animal = Animal.getAnimalById(idAnimal);
+        Cliente cliente = Cliente.getClienteByID(idCliente);
+        if (animal == null || cliente == null){
+            System.out.println("Animal ou Cliente não encontrado!");
+            return;
+        }
+        double total = 0;
+        for (Operacao op : operacoes.values()){
+            if (op.getIntervencao().equals(intervencao) && op.getIdAnimal() == idAnimal && op.getIdCliente() == idCliente && op.getDataOp().isAfter(LocalDate.now()) && op.getDataOp().isBefore(LocalDate.now().plusDays(dias))){
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+                total += op.getCusto();
+            }
+        }
+        System.out.println("Total: "+total+"€");
+    }
+
+    protected static void validarOperacao(Integer idVeterinario, Integer idAnimal, LocalDate data, LocalTime marcacao, double duracao){
+        Veterinario vet = Veterinario.getVeterinarioById(idVeterinario);
+        Animal ani = Animal.getAnimalById(idAnimal);
+        if (vet == null || ani == null){
+            System.out.println("Veterinário ou Animal não encontrado");
+            return;
+        }
+        // Percorre as operacoes do dia DATA e verificar se o veterinario tem alguma operacao marcada porem a hora será marcacao + duracao (9:00 + 0.50 = 9:30) se houver alguma operacao nesse horario retorna falso
+        for (Operacao op : operacoes.values()){
+            if (op.getDataOp().equals(data) && op.getIdVeterinario() == idVeterinario){
+                LocalTime horaFim = op.getHora().plusHours((long) op.getDuracao());
+                if (marcacao.isAfter(op.getHora()) && marcacao.isBefore(horaFim)){
+                    System.out.println("Veterinário já tem intervenção marcada nesse horário");
+                    return;
+                }
+            }
+        }
     }
 
 }

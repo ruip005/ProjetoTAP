@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 import exercicios.exercicio_animais.src.*;
@@ -95,7 +96,7 @@ public class Main_bkp {
             return transformarNumero(newValue);
         }
     }
-    public static String transformarHora(String hora) throws ParseException {
+    /*public static String transformarHora(String hora) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         format.setLenient(false);
         try {
@@ -103,6 +104,24 @@ public class Main_bkp {
             return format.format(time);
         } catch (ParseException e) {
             System.out.println("Hora inválida, por favor insira uma hora válida [HH:mm]");
+            String newTime = transformarHora(scanner.nextLine());
+            return newTime;
+        }
+    }*/
+    public static String transformarHora(String hora) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        format.setLenient(false);
+        try {
+            Date time = format.parse(hora); // Verificar se a hora é válida
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(time);
+            int minutes = calendar.get(Calendar.MINUTE);
+            if (minutes != 0 && minutes != 30) {
+                throw new ParseException("A hora deve ser inteira ou meia hora", 0);
+            }
+            return format.format(time);
+        } catch (ParseException e) {
+            System.out.println("Hora inválida, por favor insira uma hora válida [HH:mm] (apenas horas inteiras ou meias horas são aceitas)");
             String newTime = transformarHora(scanner.nextLine());
             return newTime;
         }
@@ -493,16 +512,15 @@ public class Main_bkp {
                         return;
                     }
                     Intervencao intervencao;
-                    if (tipoIntervencao.equals(tiposIntervencao[0])){
+                    if (tipoIntervencao.equals(tiposIntervencao[0].toString())){
                         intervencao = new Vacinacao(vetOp, animalOp, distancia);
-                    } else if (tipoIntervencao.equals(tiposIntervencao[1])){
+                    } else if (tipoIntervencao.equals(tiposIntervencao[1].toString())){
                         intervencao = new Consulta(vetOp, animalOp, distancia);
                     } else {
                         intervencao = new Cirurgia(vetOp, animalOp, distancia);
                     }
                     Operacao operacao = new Operacao(dataMarcada, horaMarcada, intervencao.getTipoIntervencao(), idVeterinario, idAnimal, Cliente.getClientIdByAnimalId(idAnimal), intervencao.calcularCusto(), intervencao.calcularDuracao());
                     Operacao.adicionarOperacao(operacao);
-                    System.out.println("Operaçao criada com sucesso");
                 } catch (Exception a){
                     System.out.println("ERRO: "+a);
                 } finally {
@@ -701,6 +719,38 @@ public class Main_bkp {
                     System.out.println("Qual é o número de dias?");
                     int dias = transformarNumero(scanner.nextLine());
                     Operacao.listarFaturacao(Intervencao.InterventionType.valueOf(tipoIntervencao), idAnimal, idCliente, dias);
+                } catch (Exception e){
+                    System.out.println("ERRO: "+e);
+                } finally {
+                    menuOperacao();
+                }
+                break;
+            case 11: // Listar, por tipo de interven¸c˜ao, por animal e por cliente, a fatura¸c˜ao agendada(dias agendados depois do dia X) e mostrar a soma total;
+                try {
+                    Intervencao.InterventionType[] tiposIntervencao = Intervencao.InterventionType.values();
+                    System.out.println("Qual seria o tipo de intervenção? [VACINACAO, CONSULTA, CIRURGIA]");
+                    String tipoIntervencao = scanner.nextLine().toUpperCase();
+                    while (!tipoIntervencao.equals(tiposIntervencao[0].toString()) && !tipoIntervencao.equals(tiposIntervencao[1].toString()) && !tipoIntervencao.equals(tiposIntervencao[2].toString())) {
+                        System.out.println("Tipo de intervenção inválido, por favor insira um tipo de intervenção válido [VACINACAO, CONSULTA, CIRURGIA]");
+                        tipoIntervencao = scanner.nextLine().toUpperCase();
+                    }
+                    System.out.println("Qual é o ID do animal?");
+                    int idAnimal = transformarNumero(scanner.nextLine());
+                    Animal animal = Animal.getAnimalById(idAnimal);
+                    if (animal == null) {
+                        System.out.println("Animal não encontrado!");
+                        return;
+                    }
+                    System.out.println("Qual é o ID do cliente?");
+                    int idCliente = transformarNumero(scanner.nextLine());
+                    Cliente cliente = Cliente.getClienteByID(idCliente);
+                    if (cliente == null) {
+                        System.out.println("Cliente não encontrado!");
+                        return;
+                    }
+                    System.out.println("Qual é o número de dias?");
+                    int dias = transformarNumero(scanner.nextLine());
+                    Operacao.listarFaturacaoAgendada(Intervencao.InterventionType.valueOf(tipoIntervencao), idAnimal, idCliente, dias);
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);
                 } finally {

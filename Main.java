@@ -53,9 +53,9 @@ public class Main {
             }
             // Se o tipoIntervencao for Cirurgia o codigo abaixe será Invervencao intervencao = new Cirurgia...
             Intervencao intervencao;
-            if (tipoIntervencao.equals(tiposIntervencao[0])){
+            if (tipoIntervencao.equals(tiposIntervencao[0].toString())){
                 intervencao = new Vacinacao(vetOp, animalOp, Integer.parseInt(distancia));
-            } else if (tipoIntervencao.equals(tiposIntervencao[1])){
+            } else if (tipoIntervencao.equals(tiposIntervencao[1].toString())){
                 intervencao = new Consulta(vetOp, animalOp, Integer.parseInt(distancia));
             } else {
                 intervencao = new Cirurgia(vetOp, animalOp, Integer.parseInt(distancia));
