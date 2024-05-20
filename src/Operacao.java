@@ -24,8 +24,6 @@ public class Operacao {
         this.dataOp = data;
         this.hora = hora;
         this.intervencao = intervencao;
-        this.custo = custo;
-        this.duracao = duracao;
         this.idVeterinario = idVeterinario;
         this.idAnimal = idAnimal;
         this.idCliente = idCliente;

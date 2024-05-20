@@ -1,6 +1,4 @@
 package exercicios.exercicio_animais;
-import java.rmi.server.ExportException;
-import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -9,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
+
+import exercicios.exercicio_animais.src.Ficheiro;
 import exercicios.exercicio_animais.src.*;
 import exercicios.exercicio_animais.src.Intervencao.Cirurgia;
 import exercicios.exercicio_animais.src.Intervencao.Consulta;
@@ -19,6 +19,7 @@ public class Main_bkp {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        Ficheiro.criarFicheiros();
         menuPrincipal();
     }
     public static void menuVeterinario(){

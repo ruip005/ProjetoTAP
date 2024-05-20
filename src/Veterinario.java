@@ -110,6 +110,17 @@ public class Veterinario extends Pessoa {
             return null;
         }
     }
+/*
+    public String toString() {
+        return "Veterinario{" +
+                "idVet=" + getIdVet() +
+                ", idOrdemVeterinarios=" + getIdOrdemVeterinarios() +
+                ", nome=" + getNome() +
+                ", telefone=" + getTelefone() +
+                ", email=" + getEmail() +
+                ", nif=" + getNif() +
+                '}';
+    }*/
 
     public static HashMap<Integer, ArrayList<Integer>> getAllVeterinarioAnimais() {
         return veterinarioAnimais;

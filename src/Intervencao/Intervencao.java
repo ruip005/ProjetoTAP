@@ -21,6 +21,17 @@ public abstract class Intervencao {
         this.distancia = distancia;
     }
 
+    public Veterinario getVeterinario() {
+        return veterinario;
+    }
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public double getDistancia() {
+        return distancia;
+    }
 
     public abstract double calcularCusto();
     public abstract double calcularDuracao();
