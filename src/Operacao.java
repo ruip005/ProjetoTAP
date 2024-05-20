@@ -288,5 +288,19 @@ public class Operacao {
         }
     }
 
+    public static void listarIntervencoes(Integer idAnimal){
+        Animal animal = Animal.getAnimalById(idAnimal);
+        if (animal == null){
+            System.out.println("Animal não encontrado");
+            return;
+        }
+        for (Operacao op : operacoes.values()){
+            if (op.getIdAnimal() == idAnimal){
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+            }
+        }
+        System.out.println("-------------------");
+    }
+
 }
 

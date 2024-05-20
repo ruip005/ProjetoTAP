@@ -64,7 +64,7 @@ public class Cliente extends Pessoa {
         clientes.put(cliente.idCli, cliente);
     }
 
-    public HashMap<Integer, Cliente> getClientes() {
+    public static HashMap<Integer, Cliente> getClientes() {
         return clientes;
     }
 
