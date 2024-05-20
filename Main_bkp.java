@@ -254,7 +254,48 @@ public class Main_bkp {
 
     public void escolherCliente(int value){
         switch (value) {
-            case 1: // Listar todos clientes e os seus animais
+            case 1: // Adicionar Clientes
+                try {
+                    System.out.println("Qual é o nome do Cliente?");
+                    String nome = transformarString(scanner.nextLine());
+                    System.out.println("Qual é o telefone do Cliente?");
+                    Integer telefone = transformarNumero(scanner.nextLine());
+                    while (telefone<91000000||telefone>999999999){
+                        System.out.println("Número invlaido .----");
+                        telefone = transformarNumero(scanner.nextLine());
+                    }
+                    System.out.println("Qual é o email do Cliente?");
+                    String email = transformarString(scanner.nextLine());
+                    System.out.println("Qual é o NIF do Cliente?");
+                    Integer nif = transformarNumero(scanner.nextLine());
+                    while (nif<91000000||nif>999999999){
+                        System.out.println("Número invlaido .----");
+                        nif = transformarNumero(scanner.nextLine());
+                    }
+                    System.out.println("Qual é o nome da Rua do Cliente?");
+                    String nomeRua = transformarString(scanner.nextLine());
+                    System.out.println("Qual é o número da Casa do Cliente?");
+                    Integer nPorta = transformarNumero(scanner.nextLine());
+                    System.out.println("Qual é o CP do Cliente?");
+                    Integer cp = transformarNumero(scanner.nextLine());
+                    while (cp<1000||cp>9999){
+                        System.out.println("Número invlaido .----");
+                        cp = transformarNumero(scanner.nextLine());
+                    }
+                    System.out.println("Qual é o nome da Localidade do Cliente?");
+                    String localidade = transformarString(scanner.nextLine());
+                    Cliente cliente = new Cliente(nome, telefone, email, nif, nomeRua,nPorta,cp,localidade);
+                    cliente.adicionarCliente(cliente);
+                }
+                catch (NullPointerException nul){
+                System.out.println("ERRO: "+nul);
+
+                } finally {
+                    menuCliente();
+
+                }
+                break;
+            case 2: // Listar todos clientes e os seus animais
                 try {
                     Cliente.getAllClienteAnimais().forEach((cliId, animalId) -> {
                         System.out.printf("ID do Cliente: %d | Nome do Cliente: %s | Id do Animal: %d | Nome do Animal:", Cliente.getClienteByID(cliId).getIdCli(), Cliente.getClienteByID(cliId).getNome(), Animal.getAnimalById(cliId).getIdAnimal(), Animal.getAnimalById(cliId).getNome());
@@ -267,7 +308,7 @@ public class Main_bkp {
                 }
                 break;
 
-            case 2: // Listar clientes e os seus animais com id especifico
+            case 3: // Listar clientes e os seus animais com id especifico
                 try {
                     System.out.println("Qual seria o ID do cliente?");
                     int idCli = transformarNumero(scanner.nextLine());
@@ -290,7 +331,7 @@ public class Main_bkp {
                     menuCliente();
                 }
                 break;
-            case 3: //Mostrar o Cliente de um Animal
+            case 4: //Mostrar o Cliente de um Animal
               try{
                   System.out.println("Qual é o ID do Animal?");
                   int idAnimal = transformarNumero(scanner.nextLine());
@@ -309,7 +350,7 @@ public class Main_bkp {
                   menuCliente();
               }
                 break;
-            case 4 : //Emitir um recibo de pagamento.
+            case 5 : //Emitir um recibo de pagamento.
                 try{
                     System.out.println("Qual é o ID do Cliente?");
                     int idCli = transformarNumero(scanner.nextLine());
