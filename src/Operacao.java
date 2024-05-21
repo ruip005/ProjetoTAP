@@ -131,7 +131,7 @@ public class Operacao {
                 System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
-        System.out.println("-------------------");
+        System.out.println("- - - - - - - Fim - - - - - - -");
     }
 
     public static void listarIntervencoes(Intervencao.InterventionType intervencao, Integer idVeterinario, LocalDate date){
@@ -150,7 +150,7 @@ public class Operacao {
                 System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
-        System.out.println("-------------------");
+        System.out.println("- - - - - - - Fim - - - - - - -");
     }
 
     public static void listarIntervencoes(Intervencao.InterventionType type, LocalDate date){
@@ -164,7 +164,7 @@ public class Operacao {
                 System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
-        System.out.println("-------------------");
+        System.out.println("- - - - - - - Fim - - - - - - -");
     }
 
     public static void listarIntervencoes(Intervencao.InterventionType intervencao, Integer idAnimal){
@@ -182,7 +182,7 @@ public class Operacao {
                 System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
-        System.out.println("-------------------");
+        System.out.println("- - - - - - - Fim - - - - - - -");
     }
 
     public static void listarIntervencoesHoje(Intervencao.InterventionType intervencao, Integer idAnimal){
@@ -200,7 +200,7 @@ public class Operacao {
                 System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
-        System.out.println("-------------------");
+        System.out.println("- - - - - - - Fim - - - - - - -");
     }
 
     public static void listarIntervencoesFuturas(Intervencao.InterventionType intervencao, Integer idAnimal) {
@@ -219,7 +219,7 @@ public class Operacao {
                 System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto() + "€", op.getDuracao() + "h");
             }
         }
-        System.out.println("-------------------");
+        System.out.println("- - - - - - - Fim - - - - - - -");
     }
 
     public static void listarFaturacao(Intervencao.InterventionType intervencao, Integer idAnimal, Integer idCliente, Integer dias){
@@ -243,6 +243,7 @@ public class Operacao {
             }
         }
         System.out.println("Total: "+total+"€");
+        System.out.println("- - - - - - - Fim - - - - - - -");
     }
 
     // // Listar, por tipo de interven¸c˜ao, por animal e por cliente, a fatura¸c˜ao agendada(dias agendados depois do dia X) e mostrar a soma total;
@@ -265,6 +266,7 @@ public class Operacao {
             }
         }
         System.out.println("Total: "+total+"€");
+        System.out.println("- - - - - - - Fim - - - - - - -");
     }
 
     protected static void validarOperacao(Integer idVeterinario, Integer idAnimal, LocalDate data, LocalTime marcacao, double duracao){
@@ -297,7 +299,7 @@ public class Operacao {
                 System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
             }
         }
-        System.out.println("-------------------");
+        System.out.println("- - - - - - - Fim - - - - - - -");
     }
 
 }
