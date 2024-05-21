@@ -473,22 +473,6 @@ public class Main {
                 break;
             case 5: //Emitir um recibo de pagamento. | FIX ME !!!
                 try{
-                    System.out.println("Qual é o ID do Cliente?");
-                    int idCli = transformarNumero(scanner.nextLine());
-                    Cliente cliente = Cliente.getClienteByID(idCli);
-                   if (cliente== null){
-                       System.out.println("O cliente não existe.");
-                       return;
-
-                   }
-                    System.out.println("Qual é o ID do Animal?");
-                   int idAnimal= transformarNumero(scanner.nextLine());
-                   Animal animal= Animal.getAnimalById(idAnimal);
-                   if(animal== null){
-                       System.out.println("O animal não existe.");
-                       return;
-
-                   }
                     System.out.println("Qual é o ID da Operação?");
                    int idOperacao = transformarNumero(scanner.nextLine());
                    Operacao operacao = Operacao.getOperacaoById(idOperacao);
@@ -496,7 +480,18 @@ public class Main {
                        System.out.println("A operação soliticada não existe.");
                        return;
                    }
-                    System.out.println("O valor da operação é de :"+operacao.getCusto());
+
+                   Cliente cli = Cliente.getClienteByID(operacao.getIdCliente());
+                   Veterinario myVet = Veterinario.getVetById(operacao.getIdVeterinario());
+
+                    System.out.println("- - - - - - - Recibo - - - - - - -");
+                    System.out.println("Nome do Veterinário: " +myVet.getNome());
+                    System.out.println("Nome do Cliente: " + cli.getNome());
+                    System.out.println("NIF do Cliente: " + cli.getNif());
+                    System.out.println("Id do Animal: " + operacao.getIdAnimal());
+                    System.out.println("Intervençoes: " + operacao.getIntervencao());
+                    System.out.println("Valor da operação sem IVA é de:" + operacao.getCusto());
+                    System.out.println("Valor da operação com IVA é de:" + (operacao.getCusto() + operacao.getCusto() * 20/100));
 
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);
