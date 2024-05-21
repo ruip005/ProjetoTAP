@@ -666,14 +666,14 @@ public class Main {
                 try {
                     Intervencao.InterventionType[] interventionTypes = Intervencao.InterventionType.values();
                     System.out.println("- - - - - Intervenções - - - - -");
-                    System.out.printf("1 - ", interventionTypes[0].toString());
-                    System.out.printf("2 - ", interventionTypes[1].toString());
-                    System.out.printf("3 - ", interventionTypes[2].toString());
+                    System.out.printf("\n1 - %s", interventionTypes[0].toString());
+                    System.out.printf("\n2 - %s", interventionTypes[1].toString());
+                    System.out.printf("\n3 - %s", interventionTypes[2].toString());
                 } catch (Exception e) {
                     System.out.println("ERRO: " + e);
 
                 }finally {
-                    menuVeterinario();
+                    menuOperacao();
                 }
                 break;
             case 3://Mostrar a Intervenção de um Animal. | FIX ME !!!

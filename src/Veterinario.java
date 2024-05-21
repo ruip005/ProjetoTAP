@@ -11,7 +11,7 @@ public class Veterinario extends Pessoa {
     private static HashMap<Integer, Veterinario> veterinarios = new HashMap<>(); // static para poder ser acedido por Gestor
     private static HashMap<Integer, ArrayList<Integer>> veterinarioClientes = new HashMap<Integer, ArrayList<Integer>>();
     private static HashMap<Integer, ArrayList<Integer>> veterinarioAnimais = new HashMap<Integer, ArrayList<Integer>>();
-    private static Integer nextId = 1;
+    private  Integer nextId = 1;
     private Integer idOrdemVeterinarios;
     private Integer idVet;
     public Veterinario(String nome, Integer telefone, String email, Integer nif, Integer idOrdemVeterinarios) {

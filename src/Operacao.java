@@ -9,7 +9,7 @@ import exercicios.exercicio_animais.src.Intervencao.*; // Importar todas as clas
 
 public class Operacao {
     private static HashMap <Integer, Operacao> operacoes = new HashMap<Integer, Operacao>();
-    private static Integer nextId = 1;
+    private Integer nextId = 1;
     private static Integer idOp;
     private LocalDate dataOp;
     private LocalTime hora;
@@ -128,7 +128,7 @@ public class Operacao {
         }
         for (Operacao op : operacoes.values()){
             if (op.getIntervencao().equals(intervencao) && op.getIdVeterinario() == idVeterinario){
-                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f € | Duração: %.2f h\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto(), op.getDuracao());
             }
         }
         System.out.println("- - - - - - - Fim - - - - - - -");
@@ -147,7 +147,7 @@ public class Operacao {
         }
         for (Operacao op : operacoes.values()){
             if (op.getIntervencao().equals(intervencao) && op.getIdVeterinario() == idVeterinario && op.getDataOp().equals(date)){
-                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f € | Duração: %.2f h\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto(), op.getDuracao());
             }
         }
         System.out.println("- - - - - - - Fim - - - - - - -");
@@ -161,7 +161,7 @@ public class Operacao {
         }
         for (Operacao op : operacoes.values()){
             if (op.getDataOp().equals(date) && op.getIntervencao().equals(type)){
-                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f € | Duração: %.2f h\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto(), op.getDuracao());
             }
         }
         System.out.println("- - - - - - - Fim - - - - - - -");
@@ -179,7 +179,7 @@ public class Operacao {
         }
         for (Operacao op : operacoes.values()){
             if (op.getIntervencao().equals(intervencao) && op.getIdAnimal() == idAnimal){
-                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f € | Duração: %.2f h\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto(), op.getDuracao());
             }
         }
         System.out.println("- - - - - - - Fim - - - - - - -");
@@ -197,7 +197,7 @@ public class Operacao {
         }
         for (Operacao op : operacoes.values()){
             if (op.getIntervencao().equals(intervencao) && op.getIdAnimal() == idAnimal && op.getDataOp().equals(LocalDate.now())){
-                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f € | Duração: %.2f h\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto(), op.getDuracao());
             }
         }
         System.out.println("- - - - - - - Fim - - - - - - -");
@@ -216,7 +216,7 @@ public class Operacao {
         }
         for (Operacao op : operacoes.values()) {
             if (op.getIntervencao().equals(intervencao) && op.getIdAnimal() == idAnimal && op.getDataOp().isAfter(LocalDate.now())) {
-                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto() + "€", op.getDuracao() + "h");
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f € | Duração: %.2f h\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto(), op.getDuracao());
             }
         }
         System.out.println("- - - - - - - Fim - - - - - - -");
@@ -238,7 +238,7 @@ public class Operacao {
             // Listar, por tipo de interven¸c˜ao, por animal e por cliente, a fatura¸c˜ao efetuada
             //(passada (dias antes de X) e presente (dia X)) e mostrar a soma total
             if (op.getIntervencao().equals(intervencao) && op.getIdAnimal() == idAnimal && op.getIdCliente() == idCliente && op.getDataOp().isAfter(LocalDate.now().minusDays(dias))){
-                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f € | Duração: %.2f h\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto(), op.getDuracao());
                 total += op.getCusto();
             }
         }
@@ -261,7 +261,7 @@ public class Operacao {
         double total = 0;
         for (Operacao op : operacoes.values()){
             if (op.getIntervencao().equals(intervencao) && op.getIdAnimal() == idAnimal && op.getIdCliente() == idCliente && op.getDataOp().isAfter(LocalDate.now()) && op.getDataOp().isBefore(LocalDate.now().plusDays(dias))){
-                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f € | Duração: %.2f h\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto(), op.getDuracao());
                 total += op.getCusto();
             }
         }
@@ -296,7 +296,7 @@ public class Operacao {
         }
         for (Operacao op : operacoes.values()){
             if (op.getIdAnimal() == idAnimal){
-                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f | Duração: %.2f\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto()+"€", op.getDuracao()+"h");
+                System.out.printf("ID: %d | Data: %s | Hora: %s | Intervenção: %s | Veterinário: [%d] %s | Animal: [%d] %s | Cliente: [%d] %s | Custo: %.2f € | Duração: %.2f h\n", op.getIdOp(), op.getDataOp(), op.getHora(), op.getIntervencao(), op.getIdVeterinario(), Veterinario.getVeterinarioById(op.getIdVeterinario()).getNome(), op.getIdAnimal(), Animal.getAnimalById(op.getIdAnimal()).getNome(), op.getIdCliente(), Cliente.getClienteByID(op.getIdCliente()).getNome(), op.getCusto(), op.getDuracao());
             }
         }
         System.out.println("- - - - - - - Fim - - - - - - -");
