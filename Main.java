@@ -48,6 +48,8 @@ public class Main {
         } catch (NullPointerException nul){
             System.out.println("ERRO: "+nul);
             menuVeterinario();
+        } finally {
+            System.out.println("\n");
         }
     }
 
@@ -70,6 +72,8 @@ public class Main {
         } catch (NullPointerException nul){
             System.out.println("ERRO: "+nul);
             menuCliente();
+        } finally {
+            System.out.println("\n");
         }
     }
 
@@ -93,6 +97,8 @@ public class Main {
         } catch (NullPointerException nul){
             System.out.println("ERRO: "+nul);
             menuAnimal();
+        } finally {
+            System.out.println("\n");
         }
     }
 
@@ -121,6 +127,8 @@ public class Main {
         } catch (NullPointerException nul){
             System.out.println("ERRO: "+nul);
             menuOperacao();
+        } finally {
+            System.out.println("\n");
         }
     }
 
@@ -142,6 +150,8 @@ public class Main {
         } catch (NullPointerException nul){
             System.out.println("ERRO: "+nul);
             menuPrincipal();
+        } finally {
+            System.out.println("\n");
         }
     }
 
