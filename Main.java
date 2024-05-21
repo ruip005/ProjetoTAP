@@ -36,7 +36,7 @@ public class Main {
         System.out.println("3- Mostrar os Veterinários e os seus Animais."); // Edited
         System.out.println("4- Mostrar os Veterinários e os seus Cliente & Animal. "); // Edited
         System.out.println("5- Mostrar todas as intervenções de um Veterinário de uma determinada data.");
-        System.out.println("0- Sair.");
+        System.out.println("0- Voltar.");
 
         try {
             Integer opcao = transformarNumero(scanner.nextLine());
@@ -58,7 +58,7 @@ public class Main {
         System.out.println("3- Mostrar o Cliente de um Animal.");
         System.out.println("4- Listar os animais de um cliente especifico.");
         System.out.println("5- Emitir um recibo de pagamento."); // TO DO - Fazer o recibo + iva
-        System.out.println("0- Sair.");
+        System.out.println("0- Voltar.");
 
         try {
             Integer opcao = transformarNumero(scanner.nextLine());
@@ -81,7 +81,7 @@ public class Main {
         System.out.println("3- Mostrar o Animal de um Cliente."); // TO DO - Pergunta duplicada
         System.out.println("4- Mostrar os Animais de um Cliente."); // TO DO - Pergunta duplicada Edited
         System.out.println("5- Apagar um Animal.");
-        System.out.println("0- Sair.");
+        System.out.println("0- Voltar.");
 
         try {
             Integer opcao = transformarNumero(scanner.nextLine());
@@ -109,7 +109,7 @@ public class Main {
         System.out.println("9- Mostrar as intervenções agendadas de um animal.");
         System.out.println("10- Mostrar as intervenções por animal e por cliente as faturações passadas");
         System.out.println("11- Mostrar as intervenções por animal e por cliente as faturações agendadas");
-        System.out.println("0- Sair.");
+        System.out.println("0- Voltar.");
 
         try {
             Integer opcao = transformarNumero(scanner.nextLine());
