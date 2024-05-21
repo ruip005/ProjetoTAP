@@ -671,9 +671,9 @@ public class Main {
                 try {
                     Intervencao.InterventionType[] interventionTypes = Intervencao.InterventionType.values();
                     System.out.println("- - - - - Intervenções - - - - -");
-                    System.out.printf("1 - ", interventionTypes[0]);
-                    System.out.printf("2 - ", interventionTypes[1]);
-                    System.out.printf("3 - ", interventionTypes[2]);
+                    System.out.printf("1 - ", interventionTypes[0].toString());
+                    System.out.printf("2 - ", interventionTypes[1].toString());
+                    System.out.printf("3 - ", interventionTypes[2].toString());
                 } catch (Exception e) {
                     System.out.println("ERRO: " + e);
 
