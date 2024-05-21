@@ -15,6 +15,7 @@ public abstract class Intervencao {
     protected Veterinario veterinario;
     protected Animal animal;
     protected double distancia;
+
     public Intervencao(Veterinario veterinario, Animal animal, double distancia) {
         this.veterinario = veterinario;
         this.animal = animal;

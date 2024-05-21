@@ -75,6 +75,15 @@ public class Veterinario extends Pessoa {
         }
     }
 
+    public static Veterinario getVeterinarioByIdCliente(Integer idCliente){
+        for (Map.Entry<Integer, ArrayList<Integer>> entry : veterinarioClientes.entrySet()) {
+            if (entry.getValue().contains(idCliente)){
+                return veterinarios.get(entry.getKey());
+            }
+        }
+        return null;
+    }
+
     public static Veterinario getVeterinarioById(int id) { // Verificar se a chave existe no HashMap | static para poder ser acedido por outras classes
         if (veterinarios.containsKey(id)) {
             return veterinarios.get(id);
