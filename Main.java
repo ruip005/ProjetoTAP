@@ -254,10 +254,22 @@ public class Main {
                     String nome = transformarString(scanner.nextLine());
                     System.out.println("Qual é o telefone do Veterinário?");
                     Integer telefone = transformarNumero(scanner.nextLine());
+                    while (telefone<91000000||telefone>999999999){
+                        System.out.println("Número inválido. Por favor insira um número válido.");
+                        telefone = transformarNumero(scanner.nextLine());
+                    }
                     System.out.println("Qual é o email do Veterinário?");
                     String email = transformarString(scanner.nextLine());
+                    while (!email.contains("@") || !email.contains(".")) {
+                        System.out.println("Email inválido. Por favor insira um email válido.");
+                        email = transformarString(scanner.nextLine());
+                    }
                     System.out.println("Qual é o NIF do Veterinário?");
                     Integer nif = transformarNumero(scanner.nextLine());
+                    while(nif<10000000||nif>999999999){
+                        System.out.println("Número inválido");
+                        nif = transformarNumero(scanner.nextLine());
+                    }
                     System.out.println("Qual é a ordem do Veterinário?");
                     Integer ordem = transformarNumero(scanner.nextLine());
                     Veterinario veterinario = new Veterinario(nome, telefone, email, nif, ordem);
@@ -353,6 +365,10 @@ public class Main {
                     }
                     System.out.println("Qual é o email do Cliente?");
                     String email = transformarString(scanner.nextLine());
+                    while (!email.contains("@") || !email.contains(".")) {
+                        System.out.println("Email inválido. Por favor insira um email válido.");
+                        email = transformarString(scanner.nextLine());
+                    }
                     System.out.println("Qual é o NIF do Cliente?");
                     Integer nif = transformarNumero(scanner.nextLine());
                     while (nif<91000000||nif>999999999){
