@@ -397,8 +397,10 @@ public class Main {
                     }
                     if (resposta.equals("S")) {
                         escolherAnimal(1);
+                        saveAll();
                     } else {
                         menuCliente();
+                        saveAll();
                     }
                     saveAll();
                 } catch (NullPointerException nul){
@@ -524,14 +526,14 @@ public class Main {
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);
                 } finally {
-                    menuAnimal();
                     saveAll();
+                    menuAnimal();
                 }
                 break;
             case 2: //Mostrar todos os Animais.
                 try{
                     Animal.getAnimais().forEach((id, animal) -> {
-                        System.out.println((" ID:"+ animal.getIdAnimal()+ "Nome:" + animal.getNome()+ "Espécie :" + animal.getEspecie()+ "Peso:" + animal.getPeso()+ "Sexo:"+ animal.getSexoAnimal()+ " Dono:" + animal.getDono() + "-" + Cliente.getClienteByID(animal.getDono()).getNome()));
+                        System.out.printf("ID: %d | Nome: %s | Espécie: %s | Peso: %.2fkg | Sexo: %s | Dono: [%d] - %s\n", animal.getIdAnimal(), animal.getNome(), animal.getEspecie(), animal.getPeso(), animal.getSexoAnimal(), animal.getDono(), Cliente.getClienteByID(animal.getDono()).getNome());
                     });
                     System.out.println("- - - - - - - Fim - - - - - - -");
                 }catch (Exception e){
