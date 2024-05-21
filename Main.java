@@ -490,8 +490,8 @@ public class Main {
                     System.out.println("NIF do Cliente: " + cli.getNif());
                     System.out.println("Id do Animal: " + operacao.getIdAnimal());
                     System.out.println("Intervençoes: " + operacao.getIntervencao());
-                    System.out.println("Valor da operação sem IVA é de:" + operacao.getCusto());
-                    System.out.println("Valor da operação com IVA é de:" + (operacao.getCusto() + operacao.getCusto() * 20/100));
+                    System.out.println("Valor da operação sem IVA é de: " + operacao.getCusto()+" €");
+                    System.out.println("Valor da operação com IVA é de: " + (operacao.getCusto() + operacao.getCusto() * 20/100)+" €");
 
                 } catch (Exception e){
                     System.out.println("ERRO: "+e);

@@ -47,7 +47,10 @@ public class Ficheiro {
                     writer.write(entry.getKey().toString() + ":" + intervencao.getVeterinario() + ":" + intervencao.getAnimal() + ":" + intervencao.getDistancia() + "\n");
                 } else if (entry.getValue() instanceof Operacao){
                     Operacao operacao = (Operacao) entry.getValue();
-                    writer.write(entry.getKey().toString() + ":" + operacao.getDataOp() + ":" + operacao.getHora() + ":" + operacao.getIntervencao() + ":" + operacao.getCusto() + ":" + operacao.getDuracao() + ";" + operacao.getIdVeterinario() + ";" + operacao.getIdAnimal() + ";" + operacao.getIdCliente() + "\n");
+                    String newHora = operacao.getHora().toString();
+                    // 09:00 -> 09-00
+                    newHora = newHora.replace(":", "-");
+                    writer.write(entry.getKey().toString() + ":" + operacao.getDataOp() + ":" + newHora + ":" + operacao.getIntervencao() + ":" + operacao.getIdVeterinario() + ":" + operacao.getIdAnimal() + ":" + operacao.getIdCliente() + ":" + operacao.getCusto() + ":" + operacao.getDuracao() + "\n");
                 } else
                 writer.write(entry.getKey().toString() + ":" + entry.getValue().toString() + "\n");
             }
@@ -76,7 +79,8 @@ public class Ficheiro {
                     Animal.adicionarAnimal(animal);
                     map.put((K) parts[0], (V) animal);
                 } else if (fileName.contains("data/Operacoes.txt")) {
-                    Operacao operacao = new Operacao(LocalDate.parse(parts[1]), LocalTime.parse(parts[2]), Intervencao.InterventionType.valueOf(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Double.parseDouble(parts[7]), Double.parseDouble(parts[8]));
+                    LocalTime hora = LocalTime.parse(parts[2].replace("-", ":"));
+                    Operacao operacao = new Operacao(LocalDate.parse(parts[1]), hora, Intervencao.InterventionType.valueOf(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Double.parseDouble(parts[7]), Double.parseDouble(parts[8]));
                     Operacao.adicionarOperacao(operacao);
                     map.put((K) parts[0], (V) operacao);
                 } else if(fileName.contains("data/VeterinarioClientes.txt")) {
