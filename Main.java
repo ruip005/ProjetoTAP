@@ -391,7 +391,7 @@ public class Main {
                     Cliente.adicionarCliente(cliente);
                     System.out.println("Deseja adicionar um animal? [S/N]");
                     String resposta = scanner.nextLine().toUpperCase();
-                    while (!resposta.equals("S") || !resposta.equals("N")){ // fix me
+                    while (!resposta.equals("S") && !resposta.equals("N")){ // fix me
                         System.out.println("Resposta inválida. Por favor insira uma resposta válida [S/N]");
                         resposta = scanner.nextLine().toUpperCase();
                     }
@@ -567,8 +567,8 @@ public class Main {
                    System.out.println("O(s) animal(is) do Cliente "+ cliente.getNome()+":");
                    Cliente.getAnimaisCliente(idCli).forEach((idAnimal)->{
                        Animal animal = Animal.getAnimalById(idAnimal);
-                       System.out.println((" ID:"+ animal.getIdAnimal()+ "Nome:" + animal.getNome()+ "Espécie :" + animal.getEspecie()+ "Peso:" + animal.getPeso()+ "Sexo:"+ animal.getSexoAnimal()+ " Dono:" + animal.getDono() + "-" + Cliente.getClienteByID(animal.getDono()).getNome()));
-                   });
+                       System.out.printf("ID: %d | Nome: %s | Espécie: %s | Peso: %.2fkg | Sexo: %s | Dono: [%d] - %s\n", animal.getIdAnimal(), animal.getNome(), animal.getEspecie(), animal.getPeso(), animal.getSexoAnimal(), animal.getDono(), Cliente.getClienteByID(animal.getDono()).getNome());
+                        });
                    System.out.println("- - - - - - - Fim - - - - - - -");
                 } catch(Exception e){
                    System.out.println("ERRO: "+e);
