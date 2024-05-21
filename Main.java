@@ -30,6 +30,7 @@ public class Main {
         menuPrincipal();
     }
     public static void menuVeterinario(){
+        System.out.println("\n");
         System.out.println("- - - - - -Menu de Veterinários- - - - - -");
         System.out.println("1- Adicionar um Veterinário.");
         System.out.println("2- Mostrar todos os veterinários.");
@@ -54,6 +55,7 @@ public class Main {
     }
 
     public static void menuCliente(){
+        System.out.println("\n");
         System.out.println("- - - - - -Menu de Clientes- - - - - -");
         System.out.println("1- Adicionar um Cliente."); // TO DO - Perguntar se é preciso adicionar animais
         System.out.println("2- Mostrar todos os Clientes."); // TO DO - Não pergunta no enunciado mas convem fazer
@@ -79,6 +81,7 @@ public class Main {
 
 
     public static void menuAnimal(){
+        System.out.println("\n");
         System.out.println("- - - - - -Menu de Animais- - - - - -");
         System.out.println("1- Adicionar um Animal.");
         System.out.println("2- Mostrar todos os Animais."); // TO DO - Não pergunta no enunciado mas convem fazer
@@ -103,6 +106,7 @@ public class Main {
     }
 
     public static void menuOperacao(){
+        System.out.println("\n");
         System.out.println("- - - - - -Menu de Operações- - - - - -");
         System.out.println("1- Adicionar uma Intervenção.");
         System.out.println("2- Mostrar todas as Intervenções.");
@@ -133,6 +137,7 @@ public class Main {
     }
 
     public static void menuPrincipal(){
+        System.out.println("\n");
         System.out.println("- - - - - -Menu Principal- - - - - -");
         System.out.println("1- Menu de Veterinários.");
         System.out.println("2- Menu de Clientes.");
