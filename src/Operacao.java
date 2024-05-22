@@ -2,6 +2,7 @@ package exercicios.exercicio_animais.src;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -9,7 +10,7 @@ import exercicios.exercicio_animais.src.Intervencao.*; // Importar todas as clas
 
 public class Operacao {
     private static HashMap <Integer, Operacao> operacoes = new HashMap<Integer, Operacao>();
-    private Integer nextId = 1;
+    private static Integer nextId = 1;
     private static Integer idOp;
     private LocalDate dataOp;
     private LocalTime hora;
@@ -107,9 +108,9 @@ public class Operacao {
             return;
         }
         validarOperacao(operacao.idVeterinario, operacao.idAnimal, operacao.dataOp, operacao.hora, operacao.duracao);
-        operacoes.put(operacao.idOp, operacao);
         Veterinario.adicionarAnimalVeterinario(operacao.idVeterinario, operacao.idAnimal);
         Veterinario.adicionarClienteVeterinario(operacao.idVeterinario, operacao.idCliente);
+        operacoes.put(operacao.idOp, operacao);
         System.out.println("Operação adicionada com sucesso");
     }
 
@@ -271,19 +272,32 @@ public class Operacao {
         System.out.println("- - - - - - - Fim - - - - - - -");
     }
 
-    protected static void validarOperacao(Integer idVeterinario, Integer idAnimal, LocalDate data, LocalTime marcacao, double duracao){
+    public static void validarOperacao(Integer idVeterinario, Integer idAnimal, LocalDate data, LocalTime marcacao, double duracao){
         Veterinario vet = Veterinario.getVeterinarioById(idVeterinario);
         Animal ani = Animal.getAnimalById(idAnimal);
         if (vet == null || ani == null){
             System.out.println("Veterinário ou Animal não encontrado");
             return;
         }
-        // Percorre as operacoes do dia DATA e verificar se o veterinario tem alguma operacao marcada porem a hora será marcacao + duracao (9:00 + 0.50 = 9:30) se houver alguma operacao nesse horario retorna falso
+        // Data é o dia onde será feita a intervenção
+        // marcacao é a hora da intervenção
+        // duração é a duração da intervenção (30min = 0.5, 1h = 1, 1h30 = 1.5, 2h = 2)
+        // Fim da operacao seria marcacao + duracao (9:00 + 1h = 10:00)
+        LocalTime fimOperacao = marcacao.plusHours((long) duracao);
+
+        // Verifica se o Veterinário está disponível e se o animal está disponível se estiver tudo bem, mas caso contrário, não deixa adicionar a operação
         for (Operacao op : operacoes.values()){
-            if (op.getDataOp().equals(data) && op.getIdVeterinario() == idVeterinario){
-                LocalTime horaFim = op.getHora().plusHours((long) op.getDuracao());
-                if (marcacao.isAfter(op.getHora()) && marcacao.isBefore(horaFim)){
-                    System.out.println("Veterinário já tem intervenção marcada nesse horário");
+            if (op.getIdVeterinario() == idVeterinario && op.getDataOp().equals(data)){
+                LocalTime fimOp = op.getHora().plusHours((long) op.getDuracao());
+                if (marcacao.isBefore(fimOp) && fimOperacao.isAfter(op.getHora())){
+                    System.out.println("Veterinário ocupado");
+                    return;
+                }
+            }
+            if (op.getIdAnimal() == idAnimal && op.getDataOp().equals(data)){
+                LocalTime fimOp = op.getHora().plusHours((long) op.getDuracao());
+                if (marcacao.isBefore(fimOp) && fimOperacao.isAfter(op.getHora())){
+                    System.out.println("Animal ocupado");
                     return;
                 }
             }
