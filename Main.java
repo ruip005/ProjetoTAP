@@ -665,9 +665,18 @@ public class Main {
                 try {
                     Intervencao.InterventionType[] interventionTypes = Intervencao.InterventionType.values();
                     System.out.println("- - - - - Intervenções - - - - -");
-                    System.out.printf("\n1 - %s", interventionTypes[0].toString());
-                    System.out.printf("\n2 - %s", interventionTypes[1].toString());
-                    System.out.printf("\n3 - %s", interventionTypes[2].toString());
+                    System.out.printf("\n1 - %s\n\n", interventionTypes[0].toString());
+                    Operacao.getAllVacinas().forEach((id, vacina) -> {
+                        System.out.printf("ID: %d | Data: %s | Hora: %s | Veterinário: %s | Animal: %s | Custo: %.2f€ | Duração: %s minutos\n", vacina.getIdOp(), vacina.getDataOp(), vacina.getHora(), Veterinario.getVeterinarioById(vacina.getIdVeterinario()).getNome(), Animal.getAnimalById(vacina.getIdAnimal()).getNome(), vacina.getCusto(), vacina.getDuracao());
+                    });
+                    System.out.printf("\n2 - %s\n\n", interventionTypes[1].toString());
+                    Operacao.getAllConsultas().forEach((id, consulta) -> {
+                        System.out.printf("ID: %d | Data: %s | Hora: %s | Veterinário: %s | Animal: %s | Custo: %.2f€ | Duração: %s minutos\n", consulta.getIdOp(), consulta.getDataOp(), consulta.getHora(), Veterinario.getVeterinarioById(consulta.getIdVeterinario()).getNome(), Animal.getAnimalById(consulta.getIdAnimal()).getNome(), consulta.getCusto(), consulta.getDuracao());
+                    });
+                    System.out.printf("\n3 - %s\n\n", interventionTypes[2].toString());
+                    Operacao.getAllCirurgias().forEach((id, cirurgia) -> {
+                        System.out.printf("ID: %d | Data: %s | Hora: %s | Veterinário: %s | Animal: %s | Custo: %.2f€ | Duração: %s minutos\n", cirurgia.getIdOp(), cirurgia.getDataOp(), cirurgia.getHora(), Veterinario.getVeterinarioById(cirurgia.getIdVeterinario()).getNome(), Animal.getAnimalById(cirurgia.getIdAnimal()).getNome(), cirurgia.getCusto(), cirurgia.getDuracao());
+                    });
                 } catch (Exception e) {
                     System.out.println("ERRO: " + e);
 

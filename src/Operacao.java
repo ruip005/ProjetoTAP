@@ -84,6 +84,7 @@ public class Operacao {
         return idCliente;
     }
 
+
     public static void adicionarOperacao(Operacao operacao){
         Veterinario vet = Veterinario.getVeterinarioById(operacao.getIdVeterinario());
         Cliente cli = Cliente.getClienteByID(operacao.getIdCliente());
@@ -318,5 +319,34 @@ public class Operacao {
         System.out.println("- - - - - - - Fim - - - - - - -");
     }
 
+    public static HashMap<Integer, Operacao> getAllConsultas() {
+        HashMap<Integer, Operacao> consultas = new HashMap<Integer, Operacao>();
+        for (Operacao op : operacoes.values()) {
+            if (op.getIntervencao().equals(Intervencao.InterventionType.CONSULTA)) {
+                consultas.put(op.getIdOp(), op);
+            }
+        }
+        return consultas;
+    }
+
+    public static HashMap<Integer, Operacao> getAllCirurgias() {
+        HashMap<Integer, Operacao> cirurgias = new HashMap<Integer, Operacao>();
+        for (Operacao op : operacoes.values()) {
+            if (op.getIntervencao().equals(Intervencao.InterventionType.CIRURGIA)) {
+                cirurgias.put(op.getIdOp(), op);
+            }
+        }
+        return cirurgias;
+    }
+
+    public static HashMap<Integer, Operacao> getAllVacinas() {
+        HashMap<Integer, Operacao> vacinas = new HashMap<Integer, Operacao>();
+        for (Operacao op : operacoes.values()) {
+            if (op.getIntervencao().equals(Intervencao.InterventionType.VACINACAO)) {
+                vacinas.put(op.getIdOp(), op);
+            }
+        }
+        return vacinas;
+    }
 }
 
