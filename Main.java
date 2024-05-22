@@ -290,7 +290,6 @@ public class Main {
                     Veterinario veterinario = new Veterinario(nome, telefone, email, nif, ordem);
                     Veterinario.adicionarVeterinario(veterinario);
                     System.out.println("Veterinário adicionado com sucesso!\n");
-                    menuVeterinario();
                 } catch (NullPointerException nul){
                     System.out.println("ERRO: "+nul);
                 } finally {

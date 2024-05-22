@@ -91,11 +91,11 @@ public class Operacao {
             System.out.println("Veterinário, Cliente ou Animal não encontrado");
             return;
         }
-        if (operacao.dataOp == null || operacao.dataOp.isBefore(LocalDate.now())){
+        /*if (operacao.dataOp == null || operacao.dataOp.isBefore(LocalDate.now())){
             System.out.println("A data não pode ser nula ou anterior à data atual");
             return;
-        }
-        // se hora for antes das 9 ou depois das 17:30
+        }*/
+        // se hora 1 antes das 9 ou depois das 17:30
         if (operacao.hora == null || operacao.hora.isBefore(LocalTime.of(9, 0)) || operacao.hora.isAfter(LocalTime.of(17, 30))){
             System.out.println("Hora inválida");
             return;
@@ -108,6 +108,8 @@ public class Operacao {
         }
         validarOperacao(operacao.idVeterinario, operacao.idAnimal, operacao.dataOp, operacao.hora, operacao.duracao);
         operacoes.put(operacao.idOp, operacao);
+        Veterinario.adicionarAnimalVeterinario(operacao.idVeterinario, operacao.idAnimal);
+        Veterinario.adicionarClienteVeterinario(operacao.idVeterinario, operacao.idCliente);
         System.out.println("Operação adicionada com sucesso");
     }
 

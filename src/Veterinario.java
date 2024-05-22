@@ -11,7 +11,7 @@ public class Veterinario extends Pessoa {
     private static HashMap<Integer, Veterinario> veterinarios = new HashMap<>(); // static para poder ser acedido por Gestor
     private static HashMap<Integer, ArrayList<Integer>> veterinarioClientes = new HashMap<Integer, ArrayList<Integer>>();
     private static HashMap<Integer, ArrayList<Integer>> veterinarioAnimais = new HashMap<Integer, ArrayList<Integer>>();
-    private  Integer nextId = 1;
+    private static  Integer nextId = 1;
     private Integer idOrdemVeterinarios;
     private Integer idVet;
     public Veterinario(String nome, Integer telefone, String email, Integer nif, Integer idOrdemVeterinarios) {
@@ -48,6 +48,9 @@ public class Veterinario extends Pessoa {
     }
 
     public static void adicionarClienteVeterinario(Integer idVeterinario, Integer idCliente) {
+        if (veterinarioClientes.containsKey(idCliente)) {
+            return;
+        }
         if (veterinarios.containsKey(idVeterinario) == false) {
             System.out.println("Veterinário não existe");
             return;
@@ -93,6 +96,11 @@ public class Veterinario extends Pessoa {
     }
 
     public static void adicionarAnimalVeterinario(Integer idVeterinario, Integer idAnimal) {
+        // Já existe o idAnimal no HashMap veterinarioAnimais?
+        if (veterinarioAnimais.containsKey(idAnimal)) {
+            return;
+        }
+
         if (veterinarios.containsKey(idVeterinario) == false) {
             System.out.println("Veterinário não existe");
             return;
