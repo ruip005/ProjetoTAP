@@ -1,0 +1,4 @@
+1:Freddy:Gato:4.8:MACHO:1
+2:Bolinha:Gato:6.1:FEMEA:7
+3:Branquinha:Gato:4.7:FEMEA:3
+4:Júnior:Cão:10.4:MACHO:1
